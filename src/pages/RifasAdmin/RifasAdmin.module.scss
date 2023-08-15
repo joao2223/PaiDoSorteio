@@ -1,0 +1,109 @@
+.container_titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao_criar {
+    margin-left: 1rem;
+    font-size: 16px;
+    border: none;
+    height: 2rem;
+    background-color: green;
+    color: white;
+}
+
+.botao_criar:hover {
+    cursor: pointer;
+    background-color: rgb(1, 105, 1);
+}
+
+.imagem_rifa {
+    width: 7rem;
+}
+
+.centraliza {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 60%;
+    margin-top: 1rem;
+}
+
+.container_rifas {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    margin-top: 1rem;
+    border-radius: 8px;
+}
+
+.input_rifas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.input_rifa {
+    margin-top: 1rem;
+    width: 50%;
+    border-radius: 4px;
+    height: 2rem;
+    font-size: 24px;
+}
+
+.criar_rifa {
+    margin-top: 1rem;
+    font-size: 16px;
+}
+
+.criar_rifa:hover {
+    cursor: pointer;
+}
+
+.deletar_modificar {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.5rem;
+}
+
+.botao_fechar {
+    background-color: red;
+    font-size: 16px;
+    color: white;
+    border: none;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.botao_fechar:hover {
+    cursor: pointer;
+    background-color: rgb(197, 2, 2);
+}
+
+.botao_abrir {
+    background-color: green;
+    font-size: 16px;
+    color: white;
+    border: none;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.botao_abrir:hover {
+    cursor: pointer;
+    background-color: rgb(197, 2, 2);
+}
+
+.botao_modificar {
+    font-size: 16px;
+    border: none;
+}
+
+.botao_modificar:hover {
+    cursor: pointer;
+    background-color: rgb(177, 175, 175);
+}

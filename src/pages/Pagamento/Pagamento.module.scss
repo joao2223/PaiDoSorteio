@@ -1,0 +1,214 @@
+.dark {
+    background-color: #282828;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.pagamento {
+    background-color: #31B55C;
+    width: 30rem;
+    height: 20rem;
+    border-radius: 8px;
+    margin-right: 1rem;
+    
+}
+
+.titulo_pagamento {
+    font-family: 'Abhaya Libre';
+    font-weight: 800;
+    font-size: 24px;
+    color: #CBCBCB;
+}
+
+.detalhes {
+    background-color: #218543;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.detalhes_titulo {
+    font-family: 'Abhaya Libre';
+    font-weight: 800;
+    font-size: 24px;
+    color: #CBCBCB;
+    margin-left: 1rem;
+}
+
+.sorteio{
+    font-family: 'Abhaya Libre';
+    font-weight: 400;
+    font-size: 24px;
+    color: #CBCBCB;
+    margin-left: 1rem;
+}
+
+.nome_rifa {
+    font-family: 'Abhaya Libre';
+    font-weight: 400;
+    font-size: 24px;
+    color: #CBCBCB;
+    margin-left: 1rem;
+}
+
+.numeros_reservados {
+    font-family: 'Abhaya Libre';
+    font-weight: 400;
+    font-size: 24px;
+    width: 70%;
+    text-align: center;
+    color: #CBCBCB;
+    margin-bottom: 2rem;
+    background-color: #17582d;
+    border-color: #268c48;
+    
+}
+
+.numeros_reservados:hover {
+    cursor: pointer;
+}
+
+.centraliza {
+    display: flex;
+    justify-content: center;
+}
+
+
+.container_preco {
+    display: flex;
+}
+
+.total_preco {
+    font-family: 'Abhaya Libre';
+    font-weight: 400;
+    font-size: 24px;
+    color: #CBCBCB;
+    margin-left: 1rem;
+}
+
+.preco {
+    font-family: 'Abhaya Libre';
+    font-weight: 600;
+    font-size: 24px;
+    color: #CBCBCB;
+    margin-left: 1rem;
+}
+
+.botao_enviar {
+    background-color: #17582d;
+    font-family: 'Abhaya Libre';
+    font-weight: 400;
+    font-size: 20px;
+    color: #CBCBCB;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 2rem;
+    }
+    
+    .pagamento {
+        background-color: #31B55C;
+        height: 20rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+    
+    .titulo_pagamento {
+        font-family: 'Abhaya Libre';
+        font-weight: 800;
+        font-size: 24px;
+        color: #CBCBCB;
+    }
+    
+    .detalhes {
+        background-color: #218543;
+        height: auto;
+        border-radius: 8px;
+        text-align: center;   
+        width: auto;
+        margin-bottom: 12rem;
+    }
+    
+    .detalhes_titulo {
+        font-family: 'Abhaya Libre';
+        font-weight: 800;
+        font-size: 24px;
+        color: #CBCBCB;
+    }
+    
+    .sorteio{
+        font-family: 'Abhaya Libre';
+        font-weight: 400;
+        font-size: 24px;
+        color: #CBCBCB;
+    }
+    
+    .nome_rifa {
+        font-family: 'Abhaya Libre';
+        font-weight: 400;
+        font-size: 24px;
+        color: #CBCBCB;
+       
+    }
+    
+    .numeros_reservados {
+        text-align: left;
+        font-family: 'Abhaya Libre';
+        font-weight: 400;
+        font-size: 24px;
+        width: 70%;
+        text-align: center;
+        color: #CBCBCB;
+        margin-bottom: 2rem;
+        background-color: #17582d;
+        border-color: #268c48;
+    }
+    
+    .numeros_reservados:hover {
+        cursor: pointer;
+    }
+    
+    .centraliza {
+        display: flex;
+        justify-content: center;
+    }
+    
+    
+    .container_preco {
+        display: flex;
+    }
+    
+    .total_preco {
+        font-family: 'Abhaya Libre';
+        font-weight: 400;
+        font-size: 24px;
+        color: #CBCBCB;
+    }
+    
+    .preco {
+        font-family: 'Abhaya Libre';
+        font-weight: 600;
+        font-size: 24px;
+        color: #CBCBCB;
+    }
+    
+    .botao_enviar {
+        background-color: #17582d;
+        font-family: 'Abhaya Libre';
+        font-weight: 400;
+        font-size: 20px;
+        color: #CBCBCB;
+    }
+}

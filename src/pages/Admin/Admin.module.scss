@@ -1,0 +1,42 @@
+.botao {
+    width: 10rem;
+    height: 10rem;
+    margin-left: 1rem;
+    border: none;
+    background-color: purple;
+    border-radius: 8px;
+    font-family: 'Abhaya Libre ExtraBold';
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 29.49px;
+    color: #CBCBCB;
+    padding-bottom: 1rem;
+}
+
+.botao:hover {
+    cursor: pointer;
+    
+}
+
+.centraliza {
+    display: flex;
+    justify-content: center;
+}
+
+.input_modal {
+    margin-left: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Abhaya Libre ExtraBold';
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 29.49px;
+    padding-bottom: 1rem;
+    margin-right: 1rem;
+}
+
+.botao_entrar {
+    font-size: 20px;
+    line-height: 29.49px;
+    margin-right: 1rem;
+}

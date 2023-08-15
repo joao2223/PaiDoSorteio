@@ -1,0 +1,162 @@
+.dark {
+    background-color: #282828;
+    height: 100vh;
+}
+
+.centraliza {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.container_consulta {
+    margin-top: 2rem;
+    background-color: #268c48;
+    width: 70%;
+    border: none;
+    border-radius: 16px;
+}
+
+.meus_numeros {
+    text-align: left;
+    font-family: 'Abhaya Libre';
+    font-weight: 800;
+    font-size: 24px;
+    color: #CBCBCB;
+    margin-left: 1rem;
+}
+
+.info_rifa_comprada {
+    background-color: #31B55C;
+    width: 70%;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+}
+
+.titulo_rifa {
+    text-align: left;
+    font-family: 'Abhaya Libre';
+    font-weight: 400;
+    font-size: 24px;
+    color: #CBCBCB;
+    margin-left: 1rem;
+}
+
+.preco_pago {
+    text-align: left;
+    font-family: 'Abhaya Libre';
+    font-weight: 400;
+    font-size: 16px;
+    color: #CBCBCB;
+    margin-left: 1rem;
+}
+
+.numeros_reservados {
+    text-align: left;
+    font-family: 'Abhaya Libre';
+    font-weight: 400;
+    font-size: 24px;
+    width: 70%;
+    text-align: center;
+    color: #CBCBCB;
+    margin-bottom: 2rem;
+    background-color: #268c48;
+    border-color: #268c48;
+}
+
+.numeros_reservados:hover {
+    cursor: pointer;
+
+}
+
+.numeros {
+    background-color: #CBCBCB;
+    width: 3rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.container_numeros {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 70%;
+}
+
+.titulo_status {
+    display: flex;
+    justify-content: space-between;
+}
+
+.status_compra {
+    text-align: left;
+    font-family: 'Abhaya Libre';
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+    color: #CBCBCB;
+    margin-right: 1rem;
+    margin-top: 2rem;
+}
+
+.comprovante {
+    display: flex;
+    flex-direction: column;
+}
+
+.botao_enviar {
+    background-color: #17582d;
+    font-family: 'Abhaya Libre';
+    font-weight: 400;
+    font-size: 20px;
+    color: #CBCBCB;
+    margin-top: 0.5rem;
+}
+
+.botao_enviar:hover {
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 768px) {
+    .container_consulta {
+      width: 90%;
+    }
+  }
+  
+  /* Estilos para telas muito pequenas (smartphones) */
+  @media (max-width: 480px) {
+    .container_consulta {
+      width: auto;
+      margin-top: 1rem;
+      margin-bottom: 10rem;
+      border-radius: 0; /* Remova o border-radius para ocupar toda a largura */
+    }
+    .titulo_status {
+      flex-direction: column;
+      align-items: center;
+    }
+    .info_rifa_comprada {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .botao_enviar {
+        width: 70%;
+    }
+
+    .info_rifa_comprada {
+        background-color: #31B55C;
+        width: 100%;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+    }
+
+    .preco_pago {
+        text-align: center;
+    }
+
+    
+  }

@@ -1,0 +1,124 @@
+.centraliza {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.titulo_pedidos {
+    background-color: white;
+}
+
+.total_rifas {
+    background-color:#ed4343;
+    width: 25rem;
+    color: white;
+    margin-right: 1rem;
+    border-radius: 8px;
+}
+
+.valor_card {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.texto_card {
+    font-size: 24px;
+}
+
+.total_receber {
+    background-color:#ff9800;
+    width: 25rem;
+    color: white;
+    margin-right: 1rem;
+    border-radius: 8px;
+}
+
+.total_pago {
+    background-color:#4caf50;
+    width: 25rem;
+    color: white;
+    margin-right: 1rem;
+    border-radius: 8px;
+}
+
+
+.container_numeros_disponiveis {
+    background-color:#ed4343;
+    width: auto;
+    font-size: 16px;
+    color: white;
+    margin-right: 1rem;
+    border-radius: 8px;
+}
+
+.container_numeros_reservados {
+    background-color:#ff9800;
+    width: auto;
+    font-size: 16px;
+    padding:0.5;
+    color: white;
+    margin-right: 1rem;
+    border-radius: 8px;
+}
+
+.container_numeros_pagos {
+    background-color:#4caf50;
+    width: auto;
+    font-size: 16px;
+    color: white;
+    margin-right: 1rem;
+    border-radius: 8px;
+}
+
+.container_infos_pedidos {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    align-items: center;
+    background-color: white;
+}
+
+.botao_marcar {
+    height: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.container {
+    width: 90rem;
+    border: solid 1px;
+}
+
+.pendente {
+    background-color: #ff9800;
+    color: white;
+    padding: 0.1rem;
+    border-radius: 4px;
+}
+
+.confirmado {
+    background-color: #4bae4f;
+    color: white;
+    padding: 0.1rem;
+    border-radius: 4px;
+
+}
+
+.data {
+    margin-right: 4rem;
+}
+
+.busca_numero {
+    margin-left: 0.5rem;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.botoes {
+    display: flex;
+    flex-direction: column;
+}

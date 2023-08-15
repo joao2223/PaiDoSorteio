@@ -1,0 +1,43 @@
+.titulo {
+    background-color: white;
+}
+
+.container_imagens {
+    display: flex;
+    justify-content: center;
+}
+
+.titulo_mais_imagem {
+    margin-right: 12rem;
+}
+
+.imagem {
+    width: 300px;
+}
+
+.centraliza {
+    display: flex;
+    justify-content: center;
+}
+
+.container_formulario{
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    margin-top: 1rem;
+    width: 50rem;
+    border-radius: 4px;
+    height: 2rem;
+    font-size: 24px;
+}
+
+.botao_atualizar {
+    margin-top: 1rem;
+    font-size: 16px;
+}
+
+.botao_atualizar:hover {
+    cursor: pointer;
+}
