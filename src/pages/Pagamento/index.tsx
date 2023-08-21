@@ -5,25 +5,29 @@ import styl from '../Consulta/Consulta.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import IOrder from '../../interfaces/IOrders';
-import { Modal } from 'react-bootstrap';
 import IOrders from '../../interfaces/IOrders';
 import Cabecalho from '../../components/Cabecalho';
 import { useTema } from '../../temaContext';
+import IPagamento from '../../interfaces/IPagamento';
 
 export default function Pagamento() {
 
     const { clientId } = useParams();
-    const valorPix = 'chavePIX@exemplo.com.br';
     const navigate = useNavigate();
     const [order, setOrder] = useState<IOrder>();
+    const [pagamento, setPagamento] = useState<IPagamento>()
     const [orders, setOrders] = useState<IOrders[]>();
+    const acc = ' APP_USR-475581657188028-071815-8408e2a91f964626a4b56ed758a65abf-180659991 '
+
     const { cor, mudarTema } = useTema();
+
+
 
     useEffect(() => {
         axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/orders')
             .then(resposta => {
                 setOrders(resposta.data);
-                console.log(resposta)
+                
             })
             .catch(erro => {
                 console.log(erro);
@@ -34,12 +38,37 @@ export default function Pagamento() {
         axios.get(`https://site-rifa-70b9f8e109e5.herokuapp.com/orders/${clientId}`)
             .then((response) => {
                 setOrder(response.data);
-                console.log(order)
+                axios.get(`https://api.mercadopago.com/v1/payments/${response.data.client.file}`, {
+                    headers: {
+                        'Authorization': `Bearer ${acc}`
+                    }
+                })
+                    .then(response => setPagamento(response.data))
             })
             .catch((error) => {
                 console.log(error);
             });
     }, [clientId])
+
+
+    const [copied, setCopied] = useState(false);
+
+    const handleCopyClick = () => {
+        const textToCopy = pagamento?.point_of_interaction.transaction_data.qr_code;
+
+        if (textToCopy) {
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    setCopied(true);
+                    setTimeout(() => {
+                        setCopied(false);
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Erro ao copiar: ', err);
+                });
+        }
+    };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -66,8 +95,23 @@ export default function Pagamento() {
             <div className={styles.container}>
                 <div className={styles.pagamento}>
                     <p className={styles.titulo_pagamento}>Pagamento via pix</p>
-                    <QRCode value={valorPix} />
-                    <p className={styles.titulo_pagamento}>Faça o pix de acordo com o valor total</p>
+                    <div className={styles.container_pagamento}>
+                        <img src={`data:image/png;base64,${pagamento?.point_of_interaction.transaction_data.qr_code_base64}`} alt="QR Code" className={styles.imagem_qr_code} />
+
+                        <div className={styles.texto_copia}>
+                            <input
+                                type="text"
+                                id="copiar"
+                                value={pagamento?.point_of_interaction.transaction_data.qr_code}
+                                readOnly
+                            />
+                            <button onClick={handleCopyClick}>
+                                {copied ? 'Copiado!' : 'Copiar'}
+                            </button>
+                        </div>
+                        <p className={styles.titulo_pagamento}>Faça o pagamento e confirme a compra!</p>
+                    </div>
+
                 </div>
                 <div className={styles.detalhes}>
                     <p className={styles.detalhes_titulo}>Detalhes do pedido</p>
@@ -89,13 +133,6 @@ export default function Pagamento() {
                         </div>
 
                     </div>
-
-
-                    <form action="/upload" onSubmit={handleSubmit}>
-                        <label htmlFor="">Selecione o comprovante: </label>
-                        <input type="file" id="file" name="file" accept=".txt, .pdf, .doc, .docx" required></input>
-                        <button type="submit" className={styles.botao_enviar}>Enviar</button>
-                    </form>
 
                 </div>
             </div>

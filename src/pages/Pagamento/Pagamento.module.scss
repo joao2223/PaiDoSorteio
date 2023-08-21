@@ -12,10 +12,16 @@
 .pagamento {
     background-color: #31B55C;
     width: 30rem;
-    height: 20rem;
+    height: auto;
     border-radius: 8px;
     margin-right: 1rem;
     
+}
+
+.container_pagamento {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .titulo_pagamento {
@@ -27,7 +33,7 @@
 
 .detalhes {
     background-color: #218543;
-    width: auto;
+    width: 30rem;
     height: auto;
     border-radius: 8px;
     text-align: left;
@@ -106,6 +112,14 @@
     font-weight: 400;
     font-size: 20px;
     color: #CBCBCB;
+}
+
+.imagem_qr_code {
+    width: 12rem;
+}
+
+.texto_qrcode {
+    max-width: 100px;
 }
 
 /* Media queries for responsiveness */

@@ -4,6 +4,8 @@ import { addHours, format } from 'date-fns';
 import IOrder from '../../interfaces/IOrders';
 import IRifa from '../../interfaces/IRifa';
 import styles from './PedidosAdmin.module.scss';
+import StatusComponent from '../../components/Status';
+import { useAuth } from '../../authContext';
 
 export default function PedidosAdmin() {
     const [orders, setOrders] = useState<IOrder[]>([]);
@@ -16,8 +18,9 @@ export default function PedidosAdmin() {
     const [numerosPagos, setNumerosPagos] = useState<number>(0);
     const [selectedRifa, setSelectedRifa] = useState<string | null>(null);
     const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
-    const [searchNumber, setSearchNumber] = useState<number | null>(null); // Novo estado para o campo de busca
-    const [filteredOrders, setFilteredOrders] = useState<IOrder[]>([]); // Estado para os pedidos filtrados
+    const [searchNumber, setSearchNumber] = useState<number | null>(null); 
+    const [filteredOrders, setFilteredOrders] = useState<IOrder[]>([]); 
+    const { token } = useAuth();
 
 
     useEffect(() => {
@@ -265,13 +268,13 @@ export default function PedidosAdmin() {
                     <thead>
                         <tr className={styles.container_infos_pedidos}>
                             <th>Pedido</th>
-                            <th>Telefone Cliente</th>
-                            <th>Números sorteados</th>
-                            <th>Status rifa</th>
+                            <th>Telefone</th>
+                            <th>Números</th>
+                            <th>Status</th>
                             <th>Total</th>
-                            <th>Marcar como pago</th>
+                            <th>Deletar pedido</th>
                             <th >Data</th>
-                            <th>Comprovante</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -291,13 +294,10 @@ export default function PedidosAdmin() {
                                         ))}
                                         {order.items[0].generatedNumbers.length > 5 && <span>...</span>}
                                     </td>
-                                    <td className={order.client.userStatus === "TRUE" ? styles.confirmado : styles.pendente}>
-                                        {order.client.userStatus === "TRUE" ? 'Confirmado' : 'Pendente'}
-                                    </td>
+                                    <StatusComponent file={order.client.file} id={order.client.id} name= {order.client.name} phone={order.client.phone}/>
                                     <td>{order.items[0].subTotal.toLocaleString()}</td>
                                     <td>
                                         <div className={styles.botoes}>
-                                            <button className={styles.botao_marcar} onClick={() => alteraStatus(order.client.id, order.client.name, order.client.phone, order.client.file)}>Marcar como pago</button>
                                             <button className={styles.botao_marcar} onClick = {() => deletarPedido(order.client.id)}>Deletar pedido</button>
                                         </div>
 
@@ -309,7 +309,6 @@ export default function PedidosAdmin() {
                                                 format(addHours(new Date(order.client.momentCreated), 3), 'dd/MM/yyyy HH:mm')}
                                         </p>
                                     </td>
-                                    <td>{order.client.file || order.client.userStatus == "TRUE" ? "Enviado" : "Não enviado"}</td>
                                 </tr>
                             ))}
                     </tbody>

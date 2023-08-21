@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from './Compra.module.scss';
-import logo from '../../assets/logo.svg';
 import IRifa from '../../interfaces/IRifa';
 import { CiWarning } from 'react-icons/ci';
 import selecionar from '../../assets/Compra/selecionar.svg';
@@ -21,10 +20,12 @@ export default function Compra() {
     const [orders, setOrders] = useState<IOrders[]>();
     const [quantidadeRifas, setQuantidadeRifas] = useState(Number)
     const navigate = useNavigate()
+    const acc = ' APP_USR-475581657188028-071815-8408e2a91f964626a4b56ed758a65abf-180659991 '
+    const [idCompra, setIdCompra] = useState();
     const { cor, mudarTema } = useTema();
 
     function redirecionarParaPaginaComprarAgora(id: number) {
-        navigate('/paginaComprarAgora', {replace : true})
+        navigate('/paginaComprarAgora', { replace: true })
     }
     const [showModal, setShowModal] = useState(false);
 
@@ -91,29 +92,29 @@ export default function Compra() {
 
         const name = event.currentTarget.nome.value;
         const phone = event.currentTarget.telefone.value;
-
-        const formData = { "name": name, "phone": phone, "file": "", "userStatus" : "FALSE"}
+        
+        const formData = { "name": name, "phone": phone, "file": "", "userStatus": "FALSE" }
 
         axios.post("https://site-rifa-70b9f8e109e5.herokuapp.com/users", formData)
             .then((response) => {
-                console.log(response.data);
                 const idGeradoPeloPrimeiroPost = response.data.id;
-                realizarSegundoPost(idGeradoPeloPrimeiroPost);
+                realizarSegundoPost(idGeradoPeloPrimeiroPost, name, phone);
             })
             .catch((error) => {
                 console.log(error, formData);
             });
     };
 
-    const realizarSegundoPost = (dados: number) => {
+    const realizarSegundoPost = (dados: number, nome: string, telefone:string) => {
         const clientId = dados;
+        const name = nome
+        const phone = telefone
         const formData = { "clientId": clientId }
-        console.log(formData)
+
 
         axios.post("https://site-rifa-70b9f8e109e5.herokuapp.com/orders", formData)
             .then((response) => {
-                console.log(response.data);
-                realizarTerceiroPost(clientId);
+                realizarTerceiroPost(clientId, name, phone);
                 closeModal();
             })
             .catch((error) => {
@@ -121,19 +122,60 @@ export default function Compra() {
             });
     };
 
-    const realizarTerceiroPost = (clientId: number) => {
-        const formData = { "orderId": clientId , "raffleId": id, "quantity": quantidade }
+    const realizarTerceiroPost = (clientId: number, nome:string, telefone: string) => {
+        const name = nome
+        const phone = telefone
+        const formData = { "orderId": clientId, "raffleId": id, "quantity": quantidade }
         console.log(formData);
         axios.post("https://site-rifa-70b9f8e109e5.herokuapp.com/order-items", formData)
             .then((response) => {
-                console.log(response.data);
-                navigate(`/paginaPagamento/${clientId}`);
+                realizarQuartoPost(clientId, name,phone)
+                
                 closeModal()
             })
             .catch((error) => {
                 console.log(error, formData);
             });
     };
+
+    const realizarQuartoPost = (clientId:number, name:string, phone:string) => {
+ 
+        const formData = {
+            transaction_amount: totalCompra,
+            description: rifa.name,
+            payment_method_id: 'pix',
+            payer: {
+                email: 'email@email.com',
+                first_name: 'Test',
+                last_name: 'User',
+                identification: {
+                    type: 'CPF',
+                    number: '19119119100'
+                },
+                address: {
+                    zip_code: '06233200',
+                    street_name: 'Av. das Nações Unidas',
+                    street_number: '3003',
+                    neighborhood: 'Bonfim',
+                    city: 'Osasco',
+                    federal_unit: 'SP'
+                }
+            }
+        };
+
+        axios.post('https://api.mercadopago.com/v1/payments', formData, {
+            headers: {
+                'Authorization': `Bearer ${acc}`
+            }
+        })
+            .then((response) => {
+                setIdCompra(response.data.id)
+                axios.put(`https://site-rifa-70b9f8e109e5.herokuapp.com/users/${clientId}`, { "name": name, "phone": phone, "file": response.data.id, "userStatus": "FALSE" })
+                    .then(response => navigate(`/paginaPagamento/${clientId}`))
+                console.log(response.data.id)
+            })
+            .catch(error => console.log(error))
+    }
 
     const finalizarCompra = () => {
         setCheckoutModalOpen(true);
@@ -145,14 +187,14 @@ export default function Compra() {
 
     return (
         <div className={cor == 'escuro' ? styles.dark : styles.light}>
-            <Cabecalho/>
+            <Cabecalho />
 
             <section className={styles.container_compra}>
                 <img src={rifa.imgUrl} alt={rifa.description} className={styles.imagem_rifa} />
                 <div>
                     <div>
-                        <p className={styles.descricao_rifa} style={cor == 'escuro' ? { color: '#CBCBCB' } : {color: ''}}>{rifa.description}</p>
-                        <p className={styles.descricao_rifa} style={cor == 'escuro' ? { color: '#CBCBCB' } : {color: ''}}>Quantidade de rifas disponíveis: {quantidadeRifas}</p>
+                        <p className={styles.descricao_rifa} style={cor == 'escuro' ? { color: '#CBCBCB' } : { color: '' }}>{rifa.description}</p>
+                        <p className={styles.descricao_rifa} style={cor == 'escuro' ? { color: '#CBCBCB' } : { color: '' }}>Quantidade de rifas disponíveis: {quantidadeRifas}</p>
                     </div>
                     <div>
                         <button className={styles.botao_preco}>
@@ -168,7 +210,7 @@ export default function Compra() {
                     </div>
                     <div className={styles.centraliza}>
                         <div className={styles.secao_quantidade}>
-                            <p className={styles.titulo_modal} style={cor == 'escuro' ? { color: '#CBCBCB' } : {color: ''}}>Compre a sua cota</p>
+                            <p className={styles.titulo_modal} style={cor == 'escuro' ? { color: '#CBCBCB' } : { color: '' }}>Compre a sua cota</p>
                             <div className={styles.quantidade_escolha}>
                                 <div className={styles.container}>
                                     <div className={styles.incremento}>
@@ -246,7 +288,6 @@ export default function Compra() {
                             <input type="text" name="nome" placeholder="Nome Completo" className={styles.modalInput} required />
                             <input type="text" name="telefone" placeholder="Seu Whatsapp" className={styles.modalInput} required />
                             <input type="text" name="confirmarWhatsapp" placeholder="Confirme seu Whatsapp" className={styles.modalInput} required />
-                            <input type="email" name="email" placeholder="Seu Email" className={styles.modalInput} required />
                             <button className={styles.modalButton} type="submit">Comprar Agora</button>
                         </form>
                     </div>

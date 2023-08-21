@@ -1,0 +1,37 @@
+.imagem_qr_code {
+    width: 12rem;
+    margin-bottom: 0.5rem;
+}
+
+.container_qr_code {
+    display: flex;
+    flex-direction: column;
+}
+
+.status_compra {
+    font-family: 'Abhaya Libre';
+    font-weight: 400;
+    font-size: 22px;
+    text-align: center;
+    color: #CBCBCB;
+    margin-right: 4rem;
+    margin-top: 1.5rem;
+}
+
+.container {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .status_compra {
+        margin-right: 0rem;
+    }
+
+}
