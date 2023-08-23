@@ -133,16 +133,17 @@
     
     .pagamento {
         background-color: #31B55C;
-        height: 20rem;
+        height: auto;
         border-radius: 8px;
+        margin: 0 auto;
         margin-bottom: 1rem;
-        width: 100%;
+        width: 90%;
     }
     
     .titulo_pagamento {
         font-family: 'Abhaya Libre';
         font-weight: 800;
-        font-size: 24px;
+        font-size: 20px;
         color: #CBCBCB;
     }
     
@@ -151,28 +152,29 @@
         height: auto;
         border-radius: 8px;
         text-align: center;   
-        width: auto;
-        margin-bottom: 12rem;
+        width: 90%;
+        margin: 0 auto;
+        margin-bottom: 5rem;
     }
     
     .detalhes_titulo {
         font-family: 'Abhaya Libre';
         font-weight: 800;
-        font-size: 24px;
+        font-size: 20px;
         color: #CBCBCB;
     }
     
     .sorteio{
         font-family: 'Abhaya Libre';
         font-weight: 400;
-        font-size: 24px;
+        font-size: 20px;
         color: #CBCBCB;
     }
     
     .nome_rifa {
         font-family: 'Abhaya Libre';
         font-weight: 400;
-        font-size: 24px;
+        font-size: 20px;
         color: #CBCBCB;
        
     }
@@ -181,11 +183,11 @@
         text-align: left;
         font-family: 'Abhaya Libre';
         font-weight: 400;
-        font-size: 24px;
+        font-size: 20px;
         width: 70%;
         text-align: center;
         color: #CBCBCB;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         background-color: #17582d;
         border-color: #268c48;
     }
@@ -207,14 +209,14 @@
     .total_preco {
         font-family: 'Abhaya Libre';
         font-weight: 400;
-        font-size: 24px;
+        font-size: 20px;
         color: #CBCBCB;
     }
     
     .preco {
         font-family: 'Abhaya Libre';
         font-weight: 600;
-        font-size: 24px;
+        font-size: 20px;
         color: #CBCBCB;
     }
     

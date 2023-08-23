@@ -124,18 +124,20 @@
 
     .container_rifas {
         /* Ajuste o tamanho do container para telas menores */
-        width: 100%;
+        width: 80%;
+        margin: 0 auto;
     }
 
     .card {
-        /* Ajuste o tamanho dos cards para telas menores */
+        margin-top: 1rem;
         width: 100%;
+        border-radius: 8px;
     }
 
     .imagem_rifa {
-        /* Ajuste o tamanho da imagem dos cards para telas menores */
-        width: 100%;
-        margin-right: 0;
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 0.5rem;
     }
 
     .card {
@@ -153,6 +155,7 @@
     .container_rifas_info {
         display: flex;
         flex-direction: column;
+        margin: 0 auto;
     }
 }
 

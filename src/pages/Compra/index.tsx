@@ -92,7 +92,7 @@ export default function Compra() {
 
         const name = event.currentTarget.nome.value;
         const phone = event.currentTarget.telefone.value;
-        
+
         const formData = { "name": name, "phone": phone, "file": "", "userStatus": "FALSE" }
 
         axios.post("https://site-rifa-70b9f8e109e5.herokuapp.com/users", formData)
@@ -105,7 +105,7 @@ export default function Compra() {
             });
     };
 
-    const realizarSegundoPost = (dados: number, nome: string, telefone:string) => {
+    const realizarSegundoPost = (dados: number, nome: string, telefone: string) => {
         const clientId = dados;
         const name = nome
         const phone = telefone
@@ -122,15 +122,15 @@ export default function Compra() {
             });
     };
 
-    const realizarTerceiroPost = (clientId: number, nome:string, telefone: string) => {
+    const realizarTerceiroPost = (clientId: number, nome: string, telefone: string) => {
         const name = nome
         const phone = telefone
         const formData = { "orderId": clientId, "raffleId": id, "quantity": quantidade }
         console.log(formData);
         axios.post("https://site-rifa-70b9f8e109e5.herokuapp.com/order-items", formData)
             .then((response) => {
-                realizarQuartoPost(clientId, name,phone)
-                
+                realizarQuartoPost(clientId, name, phone)
+
                 closeModal()
             })
             .catch((error) => {
@@ -138,8 +138,8 @@ export default function Compra() {
             });
     };
 
-    const realizarQuartoPost = (clientId:number, name:string, phone:string) => {
- 
+    const realizarQuartoPost = (clientId: number, name: string, phone: string) => {
+
         const formData = {
             transaction_amount: totalCompra,
             description: rifa.name,
@@ -190,24 +190,29 @@ export default function Compra() {
             <Cabecalho />
 
             <section className={styles.container_compra}>
-                <img src={rifa.imgUrl} alt={rifa.description} className={styles.imagem_rifa} />
+                <div className={styles.centraliza_mobile}>
+                    <img src={rifa.imgUrl} alt={rifa.description} className={styles.imagem_rifa} />
+                </div>
                 <div>
                     <div>
                         <p className={styles.descricao_rifa} style={cor == 'escuro' ? { color: '#CBCBCB' } : { color: '' }}>{rifa.description}</p>
                         <p className={styles.descricao_rifa} style={cor == 'escuro' ? { color: '#CBCBCB' } : { color: '' }}>Quantidade de rifas disponíveis: {quantidadeRifas}</p>
                     </div>
-                    <div>
+                    <div className={styles.centraliza_mobile}>
                         <button className={styles.botao_preco}>
                             <p className={styles.nome_botao_preco}>Por apenas</p>
                             <p className={styles.preco_botao_preco}>{rifa.price}</p>
                         </button>
                     </div>
-                    <div className={styles.automaticos}>
-                        <CiWarning />
-                        <div >
-                            <p>Número automáticos</p>
+                    <div className={styles.centraliza_mobile}>
+                        <div className={styles.automaticos}>
+                            <CiWarning />
+                            <div >
+                                <p>Número automáticos</p>
+                            </div>
                         </div>
                     </div>
+
                     <div className={styles.centraliza}>
                         <div className={styles.secao_quantidade}>
                             <p className={styles.titulo_modal} style={cor == 'escuro' ? { color: '#CBCBCB' } : { color: '' }}>Compre a sua cota</p>
@@ -257,7 +262,7 @@ export default function Compra() {
                                         </div>
                                     </div>
                                     <button className={styles.botao_finalizar} onClick={finalizarCompra}>
-                                        Finalizar Compra
+                                        Finalizar compra
                                     </button>
                                 </div>
                             </div>
@@ -265,7 +270,7 @@ export default function Compra() {
                     </div>
                 </div>
             </section>
-
+            <div className={styles.centraliza_mobile}></div>
             <Modal
                 isOpen={checkoutModalOpen}
                 onRequestClose={closeModal}

@@ -129,27 +129,34 @@
   /* Estilos para telas muito pequenas (smartphones) */
   @media (max-width: 480px) {
     .container_consulta {
-      width: auto;
+      width: 90%;
       margin-top: 1rem;
       margin-bottom: 10rem;
       border-radius: 0; /* Remova o border-radius para ocupar toda a largura */
     }
+
+    .titulo_rifa {
+        text-align: center;
+        font-family: 'Abhaya Libre';
+        font-weight: 400;
+        font-size: 20px;
+        color: #CBCBCB;
+        
+    }
+
     .titulo_status {
       flex-direction: column;
       align-items: center;
+      font-size: 20px;
     }
-    .info_rifa_comprada {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
+ 
     .botao_enviar {
         width: 70%;
     }
 
     .info_rifa_comprada {
         background-color: #31B55C;
-        width: 100%;
+        width: 90%;
         margin-bottom: 2rem;
         border-radius: 8px;
     }
