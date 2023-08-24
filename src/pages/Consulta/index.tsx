@@ -20,7 +20,7 @@ export default function Consulta() {
         infinite: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
     };
 
     useEffect(() => {
@@ -43,6 +43,7 @@ export default function Consulta() {
             <div className={styles.centraliza}>
                 <div className={styles.container_consulta}>
                     <p className={styles.meus_numeros}>Meus números</p>
+                    
                     <Slider {...settings}>
                         {rifasEncontradas.map((rifa, index) => (
                             <div key={index} className={styles.info_rifa_comprada}>

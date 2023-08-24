@@ -135,10 +135,10 @@
     }
     
     .container_consulta {
-      width: 90%;
+      width: 80%;
       margin-top: 1rem;
       margin-bottom: 0;
-      border-radius: 0; /* Remova o border-radius para ocupar toda a largura */
+      border-radius: 16px; /* Remova o border-radius para ocupar toda a largura */
     }
 
     .titulo_rifa {
@@ -178,6 +178,15 @@
 
     .numeros {
         font-size: 14px;
+    }
+
+    .meus_numeros {
+        text-align: center;
+        font-family: 'Abhaya Libre';
+        font-weight: 800;
+        font-size: 24px;
+        color: #CBCBCB;
+        margin-left: 1rem;
     }
 
   }
