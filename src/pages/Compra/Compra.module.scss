@@ -294,8 +294,9 @@
 /* Estilo para telas menores */
 @media (max-width: 768px) {
   .imagem_rifa {
-    width: 90%;
+    width: 85%;
     height: auto;
+    margin: 0;
   }
 
   .titulo_modal {
@@ -315,6 +316,9 @@
     margin-bottom: 1rem;
   }
 
+  .selecionar {
+    width: 5rem;
+  }
 
   .centraliza_mobile {
     display: flex;
@@ -366,7 +370,8 @@
     background-color: #278a48;
     width: 100%;
     height: auto;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
     margin-bottom: 1rem;
   }
 
@@ -399,7 +404,7 @@
   }
 
   .botao_finalizar {
-    width: 100%;
+    width: 10rem;
     max-width: 400px;
     background-image: linear-gradient(to right, #31B55C 0%, #114823 50%);
     font-family: 'Abhaya Libre ExtraBold';
@@ -509,5 +514,11 @@
 
   .modalButton:hover {
     background-color: #195c2f;
+  }
+
+  .centraliza_mobile {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
   }
 }

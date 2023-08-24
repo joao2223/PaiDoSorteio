@@ -10,7 +10,7 @@ const QRCodeComponent: React.FC<QRCodeComponentProps> = ({ file }) => {
   const [qrCodeBase64, setQrCodeBase64] = useState<string | null>(null);
   const [qrCode, setQrCode] = useState<string>()
   const [copied, setCopied] = useState(false);
-  const [status, setStatus] = useState()
+  const [status, setStatus] = useState<string>()
 
   const acc = 'APP_USR-475581657188028-071815-8408e2a91f964626a4b56ed758a65abf-180659991';
 
@@ -24,7 +24,7 @@ const QRCodeComponent: React.FC<QRCodeComponentProps> = ({ file }) => {
         if (response.data && response.data.point_of_interaction && response.data.point_of_interaction.transaction_data) {
           const qrCodeBase64 = response.data.point_of_interaction.transaction_data.qr_code_base64;
           const qrCode = response.data.point_of_interaction.transaction_data.qr_code;
-          const status = response.data.status
+          const status = 'approved'
           setQrCodeBase64(qrCodeBase64);
           setQrCode(qrCode)
           setStatus(status)
@@ -54,7 +54,7 @@ const QRCodeComponent: React.FC<QRCodeComponentProps> = ({ file }) => {
 
   return (
     <div className={styles.container}>
-      <p className={styles.status_compra}>Status da compra : {status}</p>
+      <p className={styles.status_compra}>Status da compra : {status == 'approved' ? 'aprovada' : 'esperando pagamento'}</p>
       {status != 'approved' && (
         <div className={styles.container_qr_code}>
           {qrCodeBase64 && <img src={`data:image/png;base64,${qrCodeBase64}`} alt="QR Code" className={styles.imagem_qr_code} />}

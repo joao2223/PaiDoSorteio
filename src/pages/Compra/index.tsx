@@ -223,13 +223,13 @@ export default function Compra() {
                                             <div className={styles.incremento_unico}>
                                                 <p className={styles.valor_incremento}> + 5</p>
                                                 <button className={styles.botao_incremento} onClick={() => incrementar(5)}>
-                                                    <img src={selecionar} alt="" />
+                                                    <img src={selecionar} alt="" className={styles.selecionar} />
                                                 </button>
                                             </div>
                                             <div className={styles.incremento_unico}>
                                                 <p className={styles.valor_incremento}> + 10</p>
                                                 <button className={styles.botao_incremento} onClick={() => incrementar(10)}>
-                                                    <img src={selecionar} alt="" />
+                                                    <img src={selecionar} alt="" className={styles.selecionar} />
                                                 </button>
                                             </div>
                                         </div>
@@ -237,13 +237,13 @@ export default function Compra() {
                                             <div className={styles.incremento_unico}>
                                                 <p className={styles.valor_incremento}> + 50</p>
                                                 <button className={styles.botao_incremento} onClick={() => incrementar(50)}>
-                                                    <img src={selecionar} alt="" />
+                                                    <img src={selecionar} alt="" className={styles.selecionar} />
                                                 </button>
                                             </div>
                                             <div className={styles.incremento_unico}>
                                                 <p className={styles.valor_incremento}> + 100</p>
                                                 <button className={styles.botao_incremento} onClick={() => incrementar(100)}>
-                                                    <img src={selecionar} alt="" />
+                                                    <img src={selecionar} alt="" className={styles.selecionar} />
                                                 </button>
                                             </div>
                                         </div>
@@ -261,9 +261,12 @@ export default function Compra() {
                                             <p className={styles.valor_total}>R$ {totalCompra.toFixed(2)}</p>
                                         </div>
                                     </div>
-                                    <button className={styles.botao_finalizar} onClick={finalizarCompra}>
-                                        Finalizar compra
-                                    </button>
+                                    <div className={styles.centraliza_mobile}>
+                                        <button className={styles.botao_finalizar} onClick={finalizarCompra}>
+                                            Finalizar compra
+                                        </button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

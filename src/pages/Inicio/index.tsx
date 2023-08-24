@@ -30,6 +30,8 @@ export default function Inicio() {
             });
     }, []);
 
+    
+
     useEffect(() => {
         axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/home-pages/1')
             .then(resposta => {
@@ -39,8 +41,6 @@ export default function Inicio() {
                 console.log(erro);
             });
     }, []);
-
-
 
     useEffect(() => {
         axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/orders')
