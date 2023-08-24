@@ -1,17 +1,27 @@
-import { useEffect, useState } from 'react';
-import styles from './Consulta.module.scss'
+import React, { useEffect, useState } from 'react';
+import styles from './Consulta.module.scss';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import IOrder from '../../interfaces/IOrders';
 import Cabecalho from '../../components/Cabecalho';
 import { useTema } from '../../temaContext';
 import QRCodeComponent from '../../components/Qrcode';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export default function Consulta() {
     const location = useLocation();
     const telefone = location.state?.telefone || '';
     const [rifasEncontradas, setRifasEncontradas] = useState<IOrder[]>([]);
     const { cor, mudarTema } = useTema();
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
 
     useEffect(() => {
         axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/orders')
@@ -33,7 +43,7 @@ export default function Consulta() {
             <div className={styles.centraliza}>
                 <div className={styles.container_consulta}>
                     <p className={styles.meus_numeros}>Meus números</p>
-                    <div className={styles.centraliza}>
+                    <Slider {...settings}>
                         {rifasEncontradas.map((rifa, index) => (
                             <div key={index} className={styles.info_rifa_comprada}>
                                 <div className={styles.titulo_status}>
@@ -53,10 +63,9 @@ export default function Consulta() {
                                         ))}
                                     </div>
                                 </div>
-
                             </div>
                         ))}
-                    </div>
+                    </Slider>
 
                 </div>
             </div>
