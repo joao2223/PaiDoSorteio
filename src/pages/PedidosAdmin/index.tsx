@@ -24,7 +24,7 @@ export default function PedidosAdmin() {
 
 
     useEffect(() => {
-        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/orders', {
+        axios.get('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/orders', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -36,7 +36,7 @@ export default function PedidosAdmin() {
                 console.log(error);
             });
 
-        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles', {
+        axios.get('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/raffles', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -57,7 +57,7 @@ export default function PedidosAdmin() {
                 const totalRifas = parseFloat(rifa.price.replace('R$', '').replace(',', '.').trim()) * rifa.quantity;
 
                 const totalReceberRifa = orders.reduce((total, order) => {
-                    if (order.client.userStatus === "FALSE" && order.items[0].raffle.name === selectedRifa) {
+                    if (order.client.clientStatus === "FALSE" && order.items[0].raffle.name === selectedRifa) {
                         const price = parseFloat(order.items[0].price.replace('R$', '').replace(',', '.').trim());
                         return total + (order.items[0].quantity * price);
                     }
@@ -65,7 +65,7 @@ export default function PedidosAdmin() {
                 }, 0);
 
                 const totalPagoRifa = orders.reduce((total, order) => {
-                    if (order.client.userStatus !== "FALSE" && order.items[0].raffle.name === selectedRifa) {
+                    if (order.client.clientStatus !== "FALSE" && order.items[0].raffle.name === selectedRifa) {
                         const price = parseFloat(order.items[0].price.replace('R$', '').replace(',', '.').trim());
                         return total + (order.items[0].quantity * price);
                     }
@@ -80,7 +80,7 @@ export default function PedidosAdmin() {
     }, [selectedRifa, orders, rifas]);
 
     useEffect(() => {
-        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles', {
+        axios.get('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/raffles', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -112,7 +112,7 @@ export default function PedidosAdmin() {
     useEffect(() => {
         if (orders) {
             const totalReceber = orders.reduce((total, order) => {
-                if (order.client.userStatus == "FALSE") {
+                if (order.client.clientStatus == "FALSE") {
                     const price = parseFloat(order.items[0].price.replace('R$', '').replace(',', '.').trim());
                     console.log("entrou")
                     return total + (order.items[0].quantity * price);
@@ -121,7 +121,7 @@ export default function PedidosAdmin() {
             }, 0)
 
             const todosNumerosReservados = orders.reduce((total, order) => {
-                if (order.client.userStatus == "FALSE") {
+                if (order.client.clientStatus == "FALSE") {
                     return total + order.items[0].quantity;
                 }
                 return total
@@ -137,7 +137,7 @@ export default function PedidosAdmin() {
     useEffect(() => {
         if (orders) {
             const totalPago = orders.reduce((total, order) => {
-                if (order.client.userStatus != "FALSE") {
+                if (order.client.clientStatus != "FALSE") {
                     const price = parseFloat(order.items[0].price.replace('R$', '').replace(',', '.').trim());
                     console.log("entrou")
                     return total + (order.items[0].quantity * price);
@@ -146,7 +146,7 @@ export default function PedidosAdmin() {
             }, 0)
 
             const todosNumerosPagos = orders.reduce((total, order) => {
-                if (order.client.userStatus != "FALSE") {
+                if (order.client.clientStatus != "FALSE") {
                     return total + order.items[0].quantity;
                 }
                 return total
@@ -184,7 +184,7 @@ export default function PedidosAdmin() {
     };
 
     const deletarPedido = (id: number) => {
-        axios.delete(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/orders/${id}`, {
+        axios.delete(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/orders/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -202,10 +202,10 @@ export default function PedidosAdmin() {
             "name": name,
             "phone": phone,
             "file": file,
-            "userStatus": "TRUE"
+            "clientStatus": "TRUE"
         };
 
-        axios.put(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/users/${id}`, formData)
+        axios.put(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/clients/${id}`, formData)
             .then(response => {
                 console.log(response);
             })
@@ -299,7 +299,7 @@ export default function PedidosAdmin() {
                         {orders
                             ?.filter((order) =>
                                 (!selectedRifa || order.items[0].raffle.name === selectedRifa) &&
-                                (!selectedStatus || order.client.userStatus === selectedStatus) &&
+                                (!selectedStatus || order.client.clientStatus === selectedStatus) &&
                                 (!searchNumber || order.items[0].generatedNumbers.includes(searchNumber))
                             )
                             .map((order) => (

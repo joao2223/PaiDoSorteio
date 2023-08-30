@@ -57,8 +57,8 @@ const StatusComponent: React.FC<StatusComponentProps> = ({ file, id, name, phone
   };
 
   if (status === 'approved') {
-    const formData = { 'name': name, 'phone': phone, 'userStatus': 'TRUE' }
-    axios.put(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/users/${id}`, formData, {
+    const formData = { 'name': name, 'phone': phone, 'clientStatus': 'TRUE' }
+    axios.put(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/clients/${id}`, formData, {
       headers: {
         'Authorization': `Bearer ${token}`
       }

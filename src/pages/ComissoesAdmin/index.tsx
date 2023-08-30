@@ -32,7 +32,7 @@ export default function ContasBancariasAdmin() {
     });
 
     useEffect(() => {
-        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/usercommissions', {
+        axios.get('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/usercommissions', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -45,14 +45,14 @@ export default function ContasBancariasAdmin() {
                     const price = parseFloat(commission.price.replace("R$", "").trim());
 
                     if (price > 0) {
-                        return axios.get(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/users/${commission.id}`, {
+                        return axios.get(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/clients/${commission.id}`, {
                             headers: {
                                 'Authorization': `Bearer ${token}`
                             }
                         })
                             .then((resposta) => {
-                                if (resposta.data.userStatus === 'TRUE') {
-                                    return axios.put(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/usercommissions/${commission.id}`, {
+                                if (resposta.data.clientStatus === 'TRUE') {
+                                    return axios.put(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/usercommissions/${commission.id}`, {
                                         "raffleCommission": commission.raffleCommission,
                                         "userCommissionStatus": commission.userCommissionStatus,
                                         "seller": commission.seller,
@@ -99,7 +99,7 @@ export default function ContasBancariasAdmin() {
         const linkPersonalizado = `http://localhost:3000/?vendedorId=${newComissao.id}`;
 
         alert(`o link do vendedor é : ${linkPersonalizado}`)
-        axios.post('https://rifas-heroku-3f8d803a7c71.herokuapp.com/usercommissions', newComissao, {
+        axios.post('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/usercommissions', newComissao, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -135,7 +135,7 @@ export default function ContasBancariasAdmin() {
         const preco = parseFloat(price.replace("R$", "").trim())
         const precoComissao = parseFloat(priceCommission.replace("R$", "").trim())
 
-        axios.put(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/usercommissions/${id}`, {
+        axios.put(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/usercommissions/${id}`, {
             "raffleCommission": raffleCommission,
             "userCommissionStatus": "PAID",
             "seller": seller,

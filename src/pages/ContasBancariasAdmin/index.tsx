@@ -25,7 +25,7 @@ export default function ContasBancariasAdmin() {
     });
 
     useEffect(() => {
-        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/bank-account', {
+        axios.get('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/bank-account', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -49,7 +49,7 @@ export default function ContasBancariasAdmin() {
     };
 
     const handleCreateConta = () => {
-        axios.post('https://rifas-heroku-3f8d803a7c71.herokuapp.com/bank-account', newConta, {
+        axios.post('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/bank-account', newConta, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

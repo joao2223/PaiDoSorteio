@@ -55,7 +55,7 @@ export default function Compra() {
 
 
     useEffect(() => {
-        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/orders')
+        axios.get('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/orders')
             .then(resposta => {
                 setOrders(resposta.data);
                 console.log(resposta)
@@ -66,7 +66,7 @@ export default function Compra() {
     }, []);
 
     useEffect(() => {
-        axios.get(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles/${id}`)
+        axios.get(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/raffles/${id}`)
             .then((resposta) => {
                 setRifa(resposta.data);
                 // setAcc(rifa?.token)
@@ -77,7 +77,7 @@ export default function Compra() {
     }, [id]);
 
     useEffect(() => {
-        axios.get(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles/${id}/remaining`)
+        axios.get(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/raffles/${id}/remaining`)
             .then((resposta) => {
                 setQuantidadeRifas(resposta.data);
             })
@@ -102,9 +102,9 @@ export default function Compra() {
         const name = event.currentTarget.nome.value;
         const phone = event.currentTarget.telefone.value;
 
-        const formData = { "name": name, "phone": phone, "file": "", "userStatus": "FALSE" }
+        const formData = { "name": name, "phone": phone, "file": "", "clientStatus": "FALSE" }
 
-        axios.post("https://rifas-heroku-3f8d803a7c71.herokuapp.com/users", formData)
+        axios.post("https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/clients", formData)
             .then((response) => {
                 const idGeradoPeloPrimeiroPost = response.data.id;
                 realizarSegundoPost(idGeradoPeloPrimeiroPost, name, phone);
@@ -121,7 +121,7 @@ export default function Compra() {
         const formData = { "clientId": clientId }
 
 
-        axios.post("https://rifas-heroku-3f8d803a7c71.herokuapp.com/orders", formData)
+        axios.post("https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/orders", formData)
             .then((response) => {
                 realizarTerceiroPost(clientId, name, phone);
                 closeModal();
@@ -136,7 +136,7 @@ export default function Compra() {
         const phone = telefone
         const formData = { "orderId": clientId, "raffleId": id, "quantity": quantidade }
         console.log(formData);
-        axios.post("https://rifas-heroku-3f8d803a7c71.herokuapp.com/order-items", formData)
+        axios.post("https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/order-items", formData)
             .then((response) => {
                 realizarQuartoPost(clientId, name, phone)
 
@@ -179,7 +179,7 @@ export default function Compra() {
         })
             .then((response) => {
                 setIdCompra(response.data.id)
-                axios.put(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/users/${clientId}`, { "name": name, "phone": phone, "file": response.data.id, "userStatus": "FALSE" }, {
+                axios.put(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/clients/${clientId}`, { "name": name, "phone": phone, "file": response.data.id, "clientStatus": "FALSE" }, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -190,7 +190,7 @@ export default function Compra() {
             .catch(error => console.log(error))
 
         if (vendedorId) {
-            axios.get(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/usercommissions/${vendedorId}`, {
+            axios.get(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/usercommissions/${vendedorId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -208,7 +208,7 @@ export default function Compra() {
                         "actionCommissionStatus": "WAITING_PAYMENT"
                     }
                     console.log(formData)
-                    axios.post('https://rifas-heroku-3f8d803a7c71.herokuapp.com/usercommissions', formData, {
+                    axios.post('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/usercommissions', formData, {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }

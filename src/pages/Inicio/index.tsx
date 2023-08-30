@@ -34,7 +34,7 @@ export default function Inicio() {
 
 
     useEffect(() => {
-        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles')
+        axios.get('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/raffles')
             .then(resposta => {
                 setRifas(resposta.data);
             })
@@ -46,7 +46,7 @@ export default function Inicio() {
 
 
     useEffect(() => {
-        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/home-pages/1')
+        axios.get('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/home-pages/1')
             .then(resposta => {
                 setImagens(resposta.data);
             })
@@ -56,7 +56,7 @@ export default function Inicio() {
     }, []);
 
     useEffect(() => {
-        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/orders')
+        axios.get('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/orders')
             .then(resposta => {
                 setOrders(resposta.data);
                 console.log(resposta)

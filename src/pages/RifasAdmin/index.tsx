@@ -25,7 +25,7 @@ export default function RifasAdmin() {
     const { token } = useAuth()
 
     useEffect(() => {
-        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/bank-account', {
+        axios.get('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/bank-account', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -40,7 +40,7 @@ export default function RifasAdmin() {
     }, []);
 
     useEffect(() => {
-        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles', {
+        axios.get('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/raffles', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -59,7 +59,7 @@ export default function RifasAdmin() {
         const priceNumber = parseFloat(price.replace("R$", "").replace(",", "."));
 
         if (raffleStatus == "OPEN") {
-            axios.put(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles/${id}`, {
+            axios.put(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/raffles/${id}`, {
                 "quantity": quantity,
                 "name": name,
                 "description": description,
@@ -82,7 +82,7 @@ export default function RifasAdmin() {
                 });
         }
         else {
-            axios.put(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles/${id}`, {
+            axios.put(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/raffles/${id}`, {
                 "quantity": quantity,
                 "name": name,
                 "description": description,
@@ -115,7 +115,7 @@ export default function RifasAdmin() {
     };
 
     const handleCreateRifa = () => {
-        axios.post('https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles', newRifa, {
+        axios.post('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/raffles', newRifa, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

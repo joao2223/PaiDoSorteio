@@ -23,7 +23,7 @@ export default function Pagamento() {
     const { cor, mudarTema } = useTema();
 
     useEffect(() => {
-        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/orders', {
+        axios.get('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/orders', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -38,7 +38,7 @@ export default function Pagamento() {
     }, []);
 
     useEffect(() => {
-        axios.get(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/orders/${clientId}`, {
+        axios.get(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/orders/${clientId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -87,9 +87,9 @@ export default function Pagamento() {
         const name = order?.client.name
         const phone = order?.client.phone
 
-        const formData = { "name": name, "phone": phone, "file": 'enviado, verificar', 'userStatus': "FALSE" }
+        const formData = { "name": name, "phone": phone, "file": 'enviado, verificar', 'clientStatus': "FALSE" }
 
-        axios.put(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/users/${id}`, formData, {
+        axios.put(`https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/clients/${id}`, formData, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

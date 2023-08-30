@@ -5,9 +5,9 @@ export default interface IOrder {
         name: string;
         phone: string;
         file: string;
-        userStatus: string;
+        clientStatus: string;
         momentCreated: string;
-        };
+    };
     items: Array<{
         quantity: number;
         price: string;
@@ -23,5 +23,5 @@ export default interface IOrder {
             raffleStatus: string;
             token: string;
         },
-    }>,    
+    }>,
 }

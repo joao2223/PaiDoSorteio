@@ -13,7 +13,7 @@ export default function ConfigAdmin() {
     const { token } = useAuth()
 
     useEffect(() => {
-        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/home-pages/1', {
+        axios.get('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/home-pages/1', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -34,7 +34,7 @@ export default function ConfigAdmin() {
             imgLogo: imgLogo,
         };
 
-        axios.put('https://rifas-heroku-3f8d803a7c71.herokuapp.com/home-pages/1', requestData, {
+        axios.put('https://site-rifas-heroku-a67dfaec93a7.herokuapp.com/home-pages/1', requestData, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
