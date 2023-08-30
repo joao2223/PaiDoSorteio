@@ -9,6 +9,7 @@ import QRCodeComponent from '../../components/Qrcode';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useAuth } from '../../authContext';
 
 export default function Consulta() {
     const location = useLocation();
@@ -22,9 +23,14 @@ export default function Consulta() {
         slidesToShow: 1,
         slidesToScroll: 1,
     };
+    const { token } = useAuth()
 
     useEffect(() => {
-        axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/orders')
+        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/orders', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((resposta) => {
                 const rifas = resposta.data;
                 const rifasComTelefone = rifas.filter((rifa: { client: { phone: any; } }) => rifa.client.phone === telefone);
@@ -41,15 +47,15 @@ export default function Consulta() {
             <Cabecalho />
 
             <div className={styles.centraliza}>
-                <div className={styles.container_consulta}>
+                <div className={cor == 'escuro' ? styles.container_consulta_dark : styles.container_consulta}>
                     <p className={styles.meus_numeros}>Meus números</p>
-                    
+
                     <Slider {...settings}>
                         {rifasEncontradas.map((rifa, index) => (
-                            <div key={index} className={styles.info_rifa_comprada}>
+                            <div key={index} className={cor == 'escuro' ? styles.info_rifa_comprada_dark : styles.info_rifa_comprada}>
                                 <div className={styles.titulo_status}>
                                     <p className={styles.titulo_rifa}>{rifa.items[0].raffle.name}</p>
-                                    <QRCodeComponent file={rifa.client.file} />
+                                    <QRCodeComponent file={rifa.client.file} tokenBanco={rifa.items[0].raffle.token} />
                                 </div>
                                 <p className={styles.preco_pago}>Total: {rifa.items[0].subTotal}</p>
                                 <button className={styles.numeros_reservados}>

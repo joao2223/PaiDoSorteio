@@ -4,42 +4,74 @@ import { addHours, format } from 'date-fns';
 import Modal from 'react-modal';
 import IRifa from '../../interfaces/IRifa';
 import styles from './RifasAdmin.module.scss';
+import style from '../PedidosAdmin/PedidosAdmin.module.scss'
+import { useAuth } from '../../authContext';
+import IConta from '../../interfaces/IConta';
 
 export default function RifasAdmin() {
     const [rifas, setRifas] = useState<IRifa[]>();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [closingRifaId, setClosingRifaId] = useState<number | null>(null);
+    const [contas, setContas] = useState<IConta[]>()
     const [newRifa, setNewRifa] = useState({
         name: '',
         description: '',
         price: '',
         imgUrl: '',
         quantity: '',
-        raffleStatus: 'OPEN'
+        raffleStatus: 'OPEN',
+        token: ''
     });
+    const { token } = useAuth()
 
     useEffect(() => {
-        axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/raffles')
+        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/bank-account', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(resposta => {
-                setRifas(resposta.data);
+                setContas(resposta.data);
+                console.log(resposta.data)
             })
             .catch(erro => {
                 console.log(erro);
             });
     }, []);
 
-    const handleCloseRifa = (name: string, description: string, img: string, price: string, quantity: number, id: number, raffleStatus: string) => {
+    useEffect(() => {
+        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(resposta => {
+                setRifas(resposta.data);
+                console.log(token)
+            })
+            .catch(erro => {
+                console.log(erro);
+            });
+    }, []);
+
+    const handleCloseRifa = (name: string, description: string, img: string, price: string, quantity: number, id: number, raffleStatus: string, tokenConta: string) => {
 
         const priceNumber = parseFloat(price.replace("R$", "").replace(",", "."));
 
         if (raffleStatus == "OPEN") {
-            axios.put(`https://site-rifa-70b9f8e109e5.herokuapp.com/raffles/${id}`, {
+            axios.put(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles/${id}`, {
                 "quantity": quantity,
                 "name": name,
                 "description": description,
                 "price": priceNumber,
                 "imgUrl": img,
-                "raffleStatus": "CLOSE"
+                "raffleStatus": "CLOSE",
+                "token": tokenConta
+
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             })
                 .then(response => {
                     console.log('Rifa fechada:', response.data);
@@ -50,13 +82,18 @@ export default function RifasAdmin() {
                 });
         }
         else {
-            axios.put(`https://site-rifa-70b9f8e109e5.herokuapp.com/raffles/${id}`, {
+            axios.put(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles/${id}`, {
                 "quantity": quantity,
                 "name": name,
                 "description": description,
                 "price": priceNumber,
                 "imgUrl": img,
-                "raffleStatus": "OPEN"
+                "raffleStatus": "OPEN",
+                "token": tokenConta
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             })
                 .then(response => {
                     console.log('Rifa fechada:', response.data);
@@ -78,7 +115,11 @@ export default function RifasAdmin() {
     };
 
     const handleCreateRifa = () => {
-        axios.post('https://site-rifa-70b9f8e109e5.herokuapp.com/raffles', newRifa)
+        axios.post('https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles', newRifa, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => {
                 console.log('Rifa criada:', response.data);
                 setNewRifa({
@@ -87,7 +128,8 @@ export default function RifasAdmin() {
                     price: '',
                     imgUrl: '',
                     quantity: '',
-                    raffleStatus: 'OPEN'
+                    raffleStatus: 'OPEN',
+                    token: ''
                 });
                 closeModal();
             })
@@ -102,32 +144,68 @@ export default function RifasAdmin() {
                 <h2>Rifas</h2>
                 <button onClick={openModal} className={styles.botao_criar}>Criar uma rifa</button>
             </div>
-            <div className={styles.centraliza}>
-                <div className={styles.container}>
-                    {rifas?.map((rifa) => (
-                        <div className={styles.container_rifas} key={rifa.id}>
-                            <p>{rifa.name}</p>
-                            <img src={rifa.imgUrl} alt="" className={styles.imagem_rifa} />
-                            <div>
-                                <p className={styles.status_rifa}>{rifa.raffleStatus == "OPEN" ? "Rifa aberta" : "Rifa Fechada"}</p>
-                                <p className={styles.quantidade_rifa}>Quantidade de números: {rifa.quantity}</p>
-                            </div>
-                            <div>
-                                <p>Última modificação:</p>
-                                <p>{rifa.momentCreated &&
-                                    format(addHours(new Date(rifa.momentCreated), 3), 'dd/MM/yyyy HH:mm')}</p>
-                            </div>
-                            <div className={styles.deletar_modificar}>
-                                <button
-                                    className={rifa.raffleStatus == "OPEN" ? styles.botao_fechar : styles.botao_abrir}
-                                    onClick={() => handleCloseRifa(rifa.name, rifa.description, rifa.imgUrl, rifa.price, rifa.quantity, rifa.id, rifa.raffleStatus)}
-                                >
-                                    {rifa.raffleStatus == "OPEN" ? "Fechar rifa" : "Abrir rifa"}
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+            <div className={style.centraliza}>
+                <table className={style.container}>
+                    <thead>
+                        <tr className={style.container_infos_pedidos}>
+                            <th>Nome</th>
+                            <th>Imagem</th>
+                            <th>Conta</th>
+                            <th>Status</th>
+                            <th>Quantidade</th>
+                            <th>Data</th>
+                            <th>Fechar rifa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {rifas?.map((rifa) => (
+                            <tr key={rifa.id} className={style.container_infos_pedidos}>
+                                <td>{rifa.name}</td>
+                                <td>
+                                    <img src={rifa.imgUrl} alt="" className={styles.imagem_rifa} />
+                                </td>
+                                <td>nome da conta</td>
+                                <td>
+                                    <p className={styles.status_rifa}>
+                                        {rifa.raffleStatus === "OPEN" ? "Rifa aberta" : "Rifa Fechada"}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p className={styles.quantidade_rifa}>Quantidade de números: {rifa.quantity}</p>
+                                </td>
+                                <td>
+                                    {rifa.momentCreated &&
+                                        format(addHours(new Date(rifa.momentCreated), 3), 'dd/MM/yyyy HH:mm')}
+                                </td>
+
+                                <td>
+                                    <div className={styles.deletar_modificar}>
+                                        <button
+                                            className={
+                                                rifa.raffleStatus === "OPEN" ? styles.botao_fechar : styles.botao_abrir
+                                            }
+                                            onClick={() =>
+                                                handleCloseRifa(
+                                                    rifa.name,
+                                                    rifa.description,
+                                                    rifa.imgUrl,
+                                                    rifa.price,
+                                                    rifa.quantity,
+                                                    rifa.id,
+                                                    rifa.raffleStatus,
+                                                    rifa.token
+                                                )
+                                            }
+                                        >
+                                            {rifa.raffleStatus === "OPEN" ? "Fechar rifa" : "Abrir rifa"}
+                                        </button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
             <Modal
                 isOpen={isModalOpen}
@@ -224,7 +302,18 @@ export default function RifasAdmin() {
                         value={newRifa.quantity}
                         onChange={(e) => setNewRifa({ ...newRifa, quantity: e.target.value })}
                     />
-
+                    <select
+                        className={styles.input_rifa}
+                        value={newRifa.token}
+                        onChange={(e) => setNewRifa({ ...newRifa, token: e.target.value })}
+                    >
+                        <option value="">Selecione uma conta</option>
+                        {contas?.map((conta) => (
+                            <option key={conta.id} value={conta.token}>
+                                {conta.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className={styles.centraliza}>
                     <button onClick={handleCreateRifa} className={styles.criar_rifa}>Criar Rifa</button>

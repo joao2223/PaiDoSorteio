@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { useAuth } from '../../authContext';
 
 interface StatusComponentProps {
-  file: string; 
+  file: string;
   id: number;
-  name:string;
+  name: string;
   phone: string
 }
 
@@ -14,6 +14,7 @@ const StatusComponent: React.FC<StatusComponentProps> = ({ file, id, name, phone
   const [qrCode, setQrCode] = useState<string>()
   const [copied, setCopied] = useState(false);
   const [status, setStatus] = useState()
+  const { token } = useAuth();
 
   const acc = 'APP_USR-475581657188028-071815-8408e2a91f964626a4b56ed758a65abf-180659991';
 
@@ -55,15 +56,19 @@ const StatusComponent: React.FC<StatusComponentProps> = ({ file, id, name, phone
     }
   };
 
-  if(status === 'approved'){
-    const formData= {'name': name ,'phone': phone, 'userStatus': 'TRUE'}
-    axios.put(`https://site-rifa-70b9f8e109e5.herokuapp.com/users/${id}`, formData)
-    .then()
-    .catch(error => console.log(error))
+  if (status === 'approved') {
+    const formData = { 'name': name, 'phone': phone, 'userStatus': 'TRUE' }
+    axios.put(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/users/${id}`, formData, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then()
+      .catch(error => console.log(error))
   }
 
   return (
-     <td>{status}</td>
+    <td>{status}</td>
   );
 };
 

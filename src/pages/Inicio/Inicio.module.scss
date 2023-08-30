@@ -17,6 +17,14 @@
     width: 70rem;
     border-radius: 1rem;
 }
+
+.container_rifas_dark {
+    margin-top: 2rem;
+    background-color: #1a1b1d;
+    width: 70rem;
+    border-radius: 1rem;
+}
+
 .titulo_secao {
     display: flex;
     margin-left: 0.5rem;
@@ -54,6 +62,20 @@
     display: flex;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+}
+
+.card_dark {
+    background-color: #424242;
+    width: 40%;
+    border: none;
+    margin-bottom: 1rem;
+    display: flex;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.card_dark:hover{
+    cursor: pointer;
 }
 
 .card:hover{
@@ -101,29 +123,33 @@
     }
 
     .logo {
-        /* Ajuste o tamanho da logo para telas menores */
+        
         width: 3rem;
     }
 
     .botao_busca {
-        /* Ajuste o tamanho do botão para telas menores */
+        
         font-size: 14px;
         height: 1.5rem;
     }
 
     .imagem_inicio {
-        /* Ajuste o tamanho da imagem para telas menores */
+        
         width: 100%;
         padding-top: 1rem;
     }
 
     .centraliza {
-        /* Ajuste a centralização para telas menores */
+       
         justify-content: flex-start;
     }
 
     .container_rifas {
-        /* Ajuste o tamanho do container para telas menores */
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .container_rifas_dark {
         width: 80%;
         margin: 0 auto;
     }
@@ -142,14 +168,26 @@
 
     .card {
         background-color: #268c48;
-        width: 100%;
+        width: 90%;
         border: none;
         margin-bottom: 1rem;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .card_dark {
+        background-color: #424242;
+        width: 90%;
+        border: none;
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 
     .container_rifas_info {
@@ -157,5 +195,28 @@
         flex-direction: column;
         margin: 0 auto;
     }
+    .texto_titulo_rifas {
+        font-family: 'Abhaya Libre';
+        font-weight: 400;
+        font-size: 18px;
+        color: #CBCBCB;
+    }
+
+    .sorte {
+        width: 2rem;
+        margin-right: 0.5rem;
+    }
+
+    .disponivel {
+       background-color: #195c2f;
+        font-family: 'Abhaya Libre';
+        font-weight: 400;
+        font-size: 14px;
+        color: #CBCBCB;
+        border: none;
+        border-radius: 16px;
+        margin-bottom:0.5rem;
+    }
+    
 }
 

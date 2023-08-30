@@ -21,6 +21,7 @@ export default interface IOrder {
             price: string;
             imgUrl: string;
             raffleStatus: string;
+            token: string;
         },
     }>,    
 }

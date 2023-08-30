@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import IRifa from '../../interfaces/IRifa';
 import styles from './Inicio.module.scss';
@@ -9,6 +9,7 @@ import IOrders from '../../interfaces/IOrders';
 import IImagens from '../../interfaces/IImagens';
 import Cabecalho from '../../components/Cabecalho';
 import { useTema } from '../../temaContext';
+import { useAuth } from '../../authContext';
 
 export default function Inicio() {
     const [rifas, setRifas] = useState<IRifa[]>();
@@ -19,9 +20,21 @@ export default function Inicio() {
     const navigate = useNavigate();
     const [imagens, setImagens] = useState<IImagens>();
     const { cor, mudarTema } = useTema();
+    const { token } = useAuth()
+    const [vendedorId, setVendedorId] = useState<number | null>(null);
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
 
     useEffect(() => {
-        axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/raffles')
+        const vendedorIdParam = searchParams.get('vendedorId');
+        if (vendedorIdParam) {
+            setVendedorId(Number(vendedorIdParam));
+        }
+    }, [searchParams]);
+
+
+    useEffect(() => {
+        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles')
             .then(resposta => {
                 setRifas(resposta.data);
             })
@@ -30,10 +43,10 @@ export default function Inicio() {
             });
     }, []);
 
-    
+
 
     useEffect(() => {
-        axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/home-pages/1')
+        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/home-pages/1')
             .then(resposta => {
                 setImagens(resposta.data);
             })
@@ -43,7 +56,7 @@ export default function Inicio() {
     }, []);
 
     useEffect(() => {
-        axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/orders')
+        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/orders')
             .then(resposta => {
                 setOrders(resposta.data);
                 console.log(resposta)
@@ -59,7 +72,7 @@ export default function Inicio() {
     }
 
     function redirecionarParaCompra(id: number) {
-        navigate(`/compra/${id}`, { replace: true });
+        navigate(`/compra/${id}?vendedorId=${vendedorId}`, { replace: true });
     }
 
     function handleOpenModal() {
@@ -71,12 +84,12 @@ export default function Inicio() {
     }
 
     return (
-        <div className={cor == 'escuro'? styles.dark : styles.white}>
-            <Cabecalho/>
+        <div className={cor == 'escuro' ? styles.dark : styles.white}>
+            <Cabecalho />
             <img src={imagens?.imgHomePage} alt="" className={styles.imagem_inicio} />
 
             <div className={styles.centraliza}>
-                <section className={styles.container_rifas}>
+                <section className={cor == 'escuro' ? styles.container_rifas_dark : styles.container_rifas}>
                     <div className={styles.titulo_secao}>
                         <img src={sorte} alt="" className={styles.sorte} />
                         <div className={styles.texto_mais_titulo_rifas}>
@@ -86,7 +99,7 @@ export default function Inicio() {
                     <div className={styles.centraliza}>
                         {rifas?.map((rifa) => (
                             rifa.raffleStatus === 'OPEN' && (
-                                <button key={rifa.id} className={styles.card} onClick={() => redirecionarParaCompra(rifa.id)}>
+                                <button key={rifa.id} className={cor == 'escuro' ? styles.card_dark : styles.card} onClick={() => redirecionarParaCompra(rifa.id)}>
                                     <img src={rifa.imgUrl} alt={rifa.description} className={styles.imagem_rifa} />
                                     <div className={styles.container_rifas_info}>
                                         <p className={styles.descricao}>{rifa.description}</p>

@@ -15,6 +15,19 @@
     width: 70%;
     border: none;
     border-radius: 16px;
+    border-top: solid 4px #424242;
+    border-bottom: solid 4px #424242;
+}
+
+.container_consulta_dark {
+    margin-top: 2rem;
+    background-color: 
+    #424242;
+    width: 70%;
+    border: none;
+    border-radius: 16px;
+    border-top: solid 4px #05c965;
+    border-bottom: solid 4px #05c965;
 }
 
 .meus_numeros {
@@ -28,6 +41,13 @@
 
 .info_rifa_comprada {
     background-color: #31B55C;
+    width: 70%;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+}
+
+.info_rifa_comprada_dark {
+    background-color: #616161;
     width: 70%;
     margin-bottom: 2rem;
     border-radius: 8px;
@@ -123,6 +143,7 @@
 @media (max-width: 768px) {
     .container_consulta {
       width: 90%;
+      background-color: #268c48;
     }
   }
   
@@ -138,8 +159,16 @@
       width: 80%;
       margin-top: 1rem;
       margin-bottom: 0;
-      border-radius: 16px; /* Remova o border-radius para ocupar toda a largura */
+      border-radius: 16px; 
+      background-color: #268c48;
     }
+
+    .container_consulta_dark {
+        width: 80%;
+        margin-top: 1rem;
+        margin-bottom: 0;
+        border-radius: 16px;
+      }
 
     .titulo_rifa {
         text-align: center;
@@ -161,6 +190,13 @@
 
     .info_rifa_comprada {
         background-color: #31B55C;
+        width: 90%;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+    }
+
+    .info_rifa_comprada_dark {
+        background-color: #616161;
         width: 90%;
         margin-bottom: 2rem;
         border-radius: 8px;

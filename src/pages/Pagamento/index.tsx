@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import QRCode from 'qrcode.react';
 import styles from './Pagamento.module.scss';
 import styl from '../Consulta/Consulta.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -9,6 +8,7 @@ import IOrders from '../../interfaces/IOrders';
 import Cabecalho from '../../components/Cabecalho';
 import { useTema } from '../../temaContext';
 import IPagamento from '../../interfaces/IPagamento';
+import { useAuth } from '../../authContext';
 
 export default function Pagamento() {
 
@@ -17,17 +17,20 @@ export default function Pagamento() {
     const [order, setOrder] = useState<IOrder>();
     const [pagamento, setPagamento] = useState<IPagamento>()
     const [orders, setOrders] = useState<IOrders[]>();
-    const acc = ' APP_USR-475581657188028-071815-8408e2a91f964626a4b56ed758a65abf-180659991 '
-
+    const [tokenBanco, setTokenBanco] = useState();
+    const acc = 'APP_USR-475581657188028-071815-8408e2a91f964626a4b56ed758a65abf-180659991'
+    const { token } = useAuth()
     const { cor, mudarTema } = useTema();
 
-
-
     useEffect(() => {
-        axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/orders')
+        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/orders', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(resposta => {
                 setOrders(resposta.data);
-                
+
             })
             .catch(erro => {
                 console.log(erro);
@@ -35,15 +38,22 @@ export default function Pagamento() {
     }, []);
 
     useEffect(() => {
-        axios.get(`https://site-rifa-70b9f8e109e5.herokuapp.com/orders/${clientId}`)
+        axios.get(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/orders/${clientId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((response) => {
                 setOrder(response.data);
                 axios.get(`https://api.mercadopago.com/v1/payments/${response.data.client.file}`, {
                     headers: {
-                        'Authorization': `Bearer ${acc}`
+                        'Authorization': `Bearer ${response.data.items[0].raffle.token}`
                     }
                 })
-                    .then(response => setPagamento(response.data))
+                    .then(response => {
+                        setPagamento(response.data)
+                        console.log(order?.items[0].raffle.token)
+                    })
             })
             .catch((error) => {
                 console.log(error);
@@ -79,7 +89,11 @@ export default function Pagamento() {
 
         const formData = { "name": name, "phone": phone, "file": 'enviado, verificar', 'userStatus': "FALSE" }
 
-        axios.put(`https://site-rifa-70b9f8e109e5.herokuapp.com/users/${id}`, formData)
+        axios.put(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/users/${id}`, formData, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((response) => {
                 navigate('/', { replace: true })
             })
@@ -93,7 +107,7 @@ export default function Pagamento() {
             <Cabecalho />
 
             <div className={styles.container}>
-                <div className={styles.pagamento}>
+                <div className={cor == 'escuro' ? styles.pagamento_dark : styles.pagamento}>
                     <p className={styles.titulo_pagamento}>Pagamento via pix</p>
                     <div className={styles.container_pagamento}>
                         <img src={`data:image/png;base64,${pagamento?.point_of_interaction.transaction_data.qr_code_base64}`} alt="QR Code" className={styles.imagem_qr_code} />
@@ -113,7 +127,7 @@ export default function Pagamento() {
                     </div>
 
                 </div>
-                <div className={styles.detalhes}>
+                <div className={cor == 'escuro' ? styles.detalhes_dark : styles.detalhes}>
                     <p className={styles.detalhes_titulo}>Detalhes do pedido</p>
                     <p className={styles.sorteio}>Sorteio</p>
                     <p className={styles.nome_rifa}>{order?.items[0].raffle.name}</p>

@@ -1,6 +1,6 @@
 .dark {
     background-color: #282828;
-    height: 100%;
+    height: 100vh;
 }
 
 .container {
@@ -14,9 +14,21 @@
     width: 30rem;
     height: auto;
     border-radius: 8px;
-    margin-right: 1rem;
-    
+    margin-right: 1rem;   
+    border-top: solid 4px #424242;
+    border-bottom: solid 4px #424242;
 }
+
+.pagamento_dark {
+    background-color: #1a1b1d;
+    width: 30rem;
+    height: auto;
+    border-radius: 8px;
+    margin-right: 1rem;  
+    border-top: solid 4px #05c965;
+    border-bottom: solid 4px #05c965;
+}
+
 
 .container_pagamento {
     display: flex;
@@ -38,6 +50,16 @@
     border-radius: 8px;
     text-align: left;
 }
+
+.detalhes_dark {
+    background-color: #424242;
+    width: 30rem;
+    height: auto;
+    border-radius: 8px;
+    text-align: left;
+}
+
+
 
 .detalhes_titulo {
     font-family: 'Abhaya Libre';
@@ -124,6 +146,12 @@
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
+
+    .dark {
+        background-color: #282828;
+        height: 100%;
+    }
+
     .container {
         display: flex;
         justify-content: center;
@@ -139,13 +167,30 @@
         margin-bottom: 1rem;
         width: 90%;
     }
-    
+
+    .pagamento_dark {
+        background-color:  #1a1b1d;
+        height: auto;
+        border-radius: 8px;
+        margin: 0 auto;
+        margin-bottom: 1rem;
+        width: 90%;
+    }
+
     .titulo_pagamento {
         font-family: 'Abhaya Libre';
         font-weight: 800;
-        font-size: 20px;
+        font-size: 16px;
         color: #CBCBCB;
     }
+
+    .total_preco {
+        font-family: 'Abhaya Libre';
+        font-weight: 400;
+        font-size: 24px;
+        color: #CBCBCB;
+    }
+    
     
     .detalhes {
         background-color: #218543;
@@ -154,27 +199,37 @@
         text-align: center;   
         width: 90%;
         margin: 0 auto;
-        margin-bottom: 5rem;
+        margin-bottom: 3rem;
+    }
+
+    .detalhes_dark {
+        background-color: #424242;
+        height: auto;
+        border-radius: 8px;
+        text-align: center;   
+        width: 90%;
+        margin: 0 auto;
+        margin-bottom: 3rem;
     }
     
     .detalhes_titulo {
         font-family: 'Abhaya Libre';
         font-weight: 800;
-        font-size: 20px;
+        font-size: 16px;
         color: #CBCBCB;
     }
     
     .sorteio{
         font-family: 'Abhaya Libre';
         font-weight: 400;
-        font-size: 20px;
+        font-size: 16px;
         color: #CBCBCB;
     }
     
     .nome_rifa {
         font-family: 'Abhaya Libre';
         font-weight: 400;
-        font-size: 20px;
+        font-size: 16px;
         color: #CBCBCB;
        
     }
@@ -183,7 +238,7 @@
         text-align: left;
         font-family: 'Abhaya Libre';
         font-weight: 400;
-        font-size: 20px;
+        font-size: 16px;
         width: 70%;
         text-align: center;
         color: #CBCBCB;
@@ -204,19 +259,20 @@
     
     .container_preco {
         display: flex;
+        justify-content: center;
     }
     
     .total_preco {
         font-family: 'Abhaya Libre';
         font-weight: 400;
-        font-size: 20px;
+        font-size: 16px;
         color: #CBCBCB;
     }
     
     .preco {
         font-family: 'Abhaya Libre';
         font-weight: 600;
-        font-size: 20px;
+        font-size: 16px;
         color: #CBCBCB;
     }
     
@@ -224,7 +280,7 @@
         background-color: #17582d;
         font-family: 'Abhaya Libre';
         font-weight: 400;
-        font-size: 20px;
+        font-size: 16px;
         color: #CBCBCB;
     }
 }

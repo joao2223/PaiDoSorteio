@@ -1,22 +1,44 @@
-import { createContext, useContext, useState } from 'react';
+
+import { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [token, setToken] = useState(() => localStorage.getItem('token') || '');
 
-    const login = (username, password) => {
-        if (username === 'admin' && password === '123') {
-            setIsLoggedIn(true); 
+    useEffect(() => {
+        localStorage.setItem('token', token);
+    }, [token]);
+
+    const login = async (username, password) => {
+        try {
+            const formData = { login: username, password: password, role: 'ADMIN' };
+            const response = await axios.post('https://rifas-heroku-3f8d803a7c71.herokuapp.com/auth/login', formData);
+            const newToken = response.data.token;
+            setToken(newToken);
+            console.log(token)
+            setIsLoggedIn(true);
+        } catch (error) {
+            console.log(error);
         }
     };
 
     const logout = () => {
+        localStorage.removeItem('token');
         setIsLoggedIn(false);
     };
 
+    const authContextValue = {
+        isLoggedIn,
+        token,
+        login,
+        logout,
+    };
+
     return (
-        <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+        <AuthContext.Provider value={authContextValue}>
             {children}
         </AuthContext.Provider>
     );

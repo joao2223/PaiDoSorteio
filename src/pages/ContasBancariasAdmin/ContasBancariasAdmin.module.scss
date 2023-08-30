@@ -10,6 +10,20 @@
     align-items: center;
 }
 
+.botao_criar {
+    margin-left: 1rem;
+    font-size: 16px;
+    border: none;
+    height: 2rem;
+    background-color: green;
+    color: white;
+}
+
+.botao_criar:hover {
+    cursor: pointer;
+    background-color: rgb(1, 105, 1);
+}
+
 .centraliza {
     display: flex;
     justify-content: center;

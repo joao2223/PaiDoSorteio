@@ -7,4 +7,5 @@ export default interface IRifa {
     imgUrl: string
     raffleStatus: string
     momentCreated: string
+    token: string
   }

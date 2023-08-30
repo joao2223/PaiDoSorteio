@@ -1,5 +1,17 @@
+.cor {
+    background-color: #CBCBCB;
+    width: 100vw;
+    height: 100vh;
+}
+
 .titulo {
-    background-color: white;
+    background-color: #CBCBCB;
+}
+
+.container_titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container_imagens {

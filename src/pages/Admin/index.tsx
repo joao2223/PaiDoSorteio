@@ -11,7 +11,7 @@ function Admin() {
     const correctUsername = 'admin';
     const correctPassword = '123';
     const navigate = useNavigate();
-    const {  login } = useAuth();
+    const { login } = useAuth();
 
     function handleModalClose() {
         if (username === correctUsername && password === correctPassword) {
@@ -23,14 +23,19 @@ function Admin() {
     }
 
     return (
-        <>
-            <h1>Administração</h1>
+        <div className={styles.cor}>
+            <div className={styles.container_titulo}>
+                <h1>Seja Bem Vindo ao seu Painel Administrativo!</h1>
+            </div>
 
-            <div>
+            <div className={styles.container_botao}>
                 <button className={styles.botao} onClick={() => navigate('/admin/rifas')}>Rifas</button>
                 <button className={styles.botao} onClick={() => navigate('/admin/pedidos')}>Pedidos</button>
                 <button className={styles.botao} onClick={() => navigate('/admin/configuracoes')}>Configuracoes</button>
             </div>
+            <button className={styles.botao} onClick={() => navigate('/admin/comissoes')}>Comissões</button>
+            <button className={styles.botao} onClick={() => navigate('/admin/contasbancarias')}>Contas bancárias</button>
+
             <Modal
                 isOpen={isModalOpen}
                 onRequestClose={handleModalClose}
@@ -52,8 +57,8 @@ function Admin() {
                     className={styles.input_modal}
                 />
                 <button onClick={handleModalClose} className={styles.botao_entrar}>Entrar</button>
-            </Modal> 
-        </>
+            </Modal>
+        </div>
     );
 }
 

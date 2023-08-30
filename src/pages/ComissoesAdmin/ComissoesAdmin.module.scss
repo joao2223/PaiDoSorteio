@@ -10,6 +10,20 @@
     align-items: center;
 }
 
+.botao_criar {
+    margin-left: 1rem;
+    font-size: 16px;
+    border: none;
+    height: 2rem;
+    background-color: green;
+    color: white;
+}
+
+.botao_criar:hover {
+    cursor: pointer;
+    background-color: rgb(1, 105, 1);
+}
+
 .centraliza {
     display: flex;
     justify-content: center;
@@ -18,7 +32,7 @@
 
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     border: 1px solid #ccc;
     padding: 1rem;
     border-radius: 8px;
@@ -33,7 +47,7 @@
 
 .container_infos_pedidos {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(8, 1fr);
     align-items: center;
     padding: 0.5rem 1rem;
     border: 1px solid #ccc;
@@ -101,6 +115,17 @@
     padding: 0.5rem;
     border-radius: 8px;
     margin-right: 1rem;
+}
+
+.botao_marcar {
+    height: 2rem;
+    margin-bottom: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
 }
 
 

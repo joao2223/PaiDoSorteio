@@ -1,5 +1,16 @@
+.container_titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.container_botao {
+    margin-bottom: 1rem;
+}
+
 .botao {
-    width: 10rem;
+    width: 13rem;
     height: 10rem;
     margin-left: 1rem;
     border: none;
@@ -39,4 +50,10 @@
     font-size: 20px;
     line-height: 29.49px;
     margin-right: 1rem;
+}
+
+.cor {
+    background-color: #CBCBCB;
+    width: 100vw;
+    height: 100vh;
 }

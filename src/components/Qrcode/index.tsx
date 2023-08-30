@@ -4,9 +4,10 @@ import styles from './Qrcode.module.scss'
 
 interface QRCodeComponentProps {
   file: string; 
+  tokenBanco:string
 }
 
-const QRCodeComponent: React.FC<QRCodeComponentProps> = ({ file }) => {
+const QRCodeComponent: React.FC<QRCodeComponentProps> = ({ file, tokenBanco }) => {
   const [qrCodeBase64, setQrCodeBase64] = useState<string | null>(null);
   const [qrCode, setQrCode] = useState<string>()
   const [copied, setCopied] = useState(false);
@@ -17,7 +18,7 @@ const QRCodeComponent: React.FC<QRCodeComponentProps> = ({ file }) => {
   useEffect(() => {
     axios.get(`https://api.mercadopago.com/v1/payments/${file}`, {
       headers: {
-        'Authorization': `Bearer ${acc}`
+        'Authorization': `Bearer ${tokenBanco}`
       }
     })
       .then(response => {

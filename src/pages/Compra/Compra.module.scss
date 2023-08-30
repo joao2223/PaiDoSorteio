@@ -47,6 +47,24 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border: solid;
+  border-radius: 8px;
+  background-color: #31B55C;
+  margin-bottom: 2rem;
+  border-right: 2px solid #00e06e;
+  border-left: 2px solid #00e06e
+}
+
+.secao_quantidade_dark {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid;
+  border-radius: 8px;
+  background-color: #1a1b1d;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #00e06e;
+  border-top: 2px solid #00e06e
 }
 
 .quantidade_escolha {
@@ -63,7 +81,8 @@
 .imagem_rifa {
   width: 32rem;
   margin-right: 1rem;
-  height: 24rem;
+  height: 20rem;
+  border-radius: 8px;
 }
 
 .descricao_rifa {
@@ -78,28 +97,42 @@
   background-color: #31B55C;
   border-radius: 8px;
   border: none;
+  height: 6rem;
+  border-bottom: 7px solid #1a1b1d;
 }
+
+.botao_preco_dark {
+  width: 40rem;
+  background-color: #1a1b1d;
+  border-radius: 8px;
+  border: none;
+  height: 6rem;
+  border-bottom: 4px solid #00e06e;
+}
+
 
 .nome_botao_preco {
   font-family: 'Abhaya Libre';
   font-weight: 400;
-  font-size: 24px;
+  font-size: 15px;
   color: #CBCBCB;
 }
 
 .preco_botao_preco {
   font-family: 'Abhaya Libre';
   font-weight: 600;
-  font-size: 32px;
+  font-size: 24px;
   color: #CBCBCB;
 }
 
 .automaticos {
   display: flex;
   align-items: center;
+  width: 40rem;
   font-family: 'Abhaya Libre';
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
+  height: 3rem;
   color: #CBCBCB;
   background-color: #31B55C;
   margin-top: 1rem;
@@ -108,38 +141,85 @@
   border-color: yellow;
 }
 
+.automaticos_dark {
+  display: flex;
+  align-items: center;
+  width: 40rem;
+  font-family: 'Abhaya Libre';
+  font-weight: 600;
+  font-size: 20px;
+  height: 3rem;
+  color: #CBCBCB;
+  background-color: #1a1b1d;
+  margin-top: 1rem;
+  border-radius: 8px;
+  border: solid 1px;
+  border-color: yellow;
+}
+
 .container {
-  width: 50%;
+  width: 70%;
 }
 
 .dois_incrementos {
   display: flex;
   justify-content: center;
+
 }
 
 .incremento_unico {
   background-color: #278a48;
   width: 20rem;
-  height: 8rem;
   margin-right: 1rem;
   margin-bottom: 2rem;
+}
+
+.incremento_unico_dark {
+  background-color: #282828;
+  width: 20rem;
+  margin-right: 1rem;
+  margin-bottom: 2rem;
+}
+
+.selecionar {
+  width: 5rem;
+}
+
+.valor_incremento_mais_de_um {
+  font-family: 'Abhaya Libre ExtraBold';
+  font-weight: 800;
+  font-size: 16px;
+  color: #CBCBCB;
+  text-align: center;
 }
 
 .valor_incremento {
   font-family: 'Abhaya Libre ExtraBold';
   font-weight: 800;
-  font-size: 24px;
+  font-size: 16px;
   color: #CBCBCB;
-  padding-bottom: 1rem;
   text-align: center;
 }
 
 .botao_incremento {
-  background-color: #31B55C;
+  background-color: #3ba95f;
   border: none;
   padding: 1rem;
   color: #CBCBCB;
   width: 100%;
+}
+
+.botao_incremento_dark {
+  background-color: #424242;
+  border: none;
+  padding: 1rem;
+  color: #CBCBCB;
+  width: 100%;
+}
+
+.botao_incremento_dark:hover {
+  cursor: pointer;
+  background-color: #272626;
 }
 
 .botao_incremento:hover {
@@ -158,15 +238,32 @@
   justify-content: space-around;
   background-color: #114823;
   width: 30rem;
-  border-radius: 16px;
-  height: 4rem;
+  border-radius: 24px;
+  height: 3rem;
 }
+
+.incremento_um_em_um_dark {
+  display: flex;
+  justify-content: space-around;
+  background-color: #575757;
+  width: 30rem;
+  border-radius: 24px;
+  height: 3rem;
+}
+
 
 .botao_operacao {
   border: none;
   background-color: #114823;
-  font-size: 24px;
-  color: #31B55C;
+  font-size: 28px;
+  color: #CBCBCB;
+}
+
+.botao_operacao_dark {
+  border: none;
+  background-color: #575757;
+  font-size: 28px;
+  color: #0ecb6a;
 }
 
 .botao_operacao:hover {
@@ -175,14 +272,30 @@
 
 .total_compra {
   background-color: #278a48;
-  width: 40%;
-  margin-top: 1rem;
+  width: 20rem;
+  margin-top: 0.5rem;
   border-radius: 8px;
-  height: 5rem;
+  height: 4rem;
   font-family: 'Abhaya Libre ExtraBold';
   font-weight: 400;
   font-size: 16px;
   color: white;
+  border-left: 7px solid #00e06e;
+  border-right: 7px solid #00e06e;
+}
+
+.total_compra_dark {
+  background-color: #424242;
+  width: 20rem;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  height: 4rem;
+  font-family: 'Abhaya Libre ExtraBold';
+  font-weight: 400;
+  font-size: 16px;
+  color: white;
+  border-left: 7px solid #00e06e;
+  border-right: 7px solid #00e06e;
 }
 
 .valor_total {
@@ -195,9 +308,9 @@
   background-image: linear-gradient(to right, #31B55C 0%, #114823 50%);
   font-family: 'Abhaya Libre ExtraBold';
   font-weight: 400;
-  font-size: 24px;
+  font-size: 20px;
   color: white;
-  height: 5rem;
+  height: 3rem;
   border-radius: 8px;
   border: none;
   margin-top: 1rem;
@@ -300,7 +413,7 @@
   }
 
   .titulo_modal {
-    font-size: 21px;
+    font-size: 16px;
   }
 
   .container_compra {
@@ -314,6 +427,20 @@
     width: auto;
     max-width: 600px;
     margin-bottom: 1rem;
+  }
+
+  .secao_quantidade_dark {
+    width: auto;
+    max-width: 600px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: solid;
+    border-radius: 8px;
+    background-color: #1a1b1d;
+    border-bottom: 2px solid #00e06e;
+    border-top: 2px solid #00e06e
   }
 
   .selecionar {
@@ -333,14 +460,29 @@
     font-family: 'Abhaya Libre';
     font-weight: 600;
     font-size: 16px;
-    width: 90%;
+    width: 95%;
     color: #CBCBCB;
     background-color: #31B55C;
-    margin-top: 1rem;
+    margin-bottom: 0.5rem;
     border-radius: 8px;
     border: solid 1px;
     border-color: yellow;
-    padding: 0.5rem;
+  }
+
+  .automaticos_dark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Abhaya Libre';
+    font-weight: 600;
+    font-size: 16px;
+    width: 95%;
+    color: #CBCBCB;
+    background-color: #1a1b1d;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    border: solid 1px;
+    border-color: yellow;
   }
 
   .botao_preco {
@@ -349,13 +491,22 @@
     background-color: #31B55C;
     border-radius: 8px;
     border: none;
+  }
 
+  .botao_preco_dark {
+    width: 90%;
+    max-width: 400px;
+    background-color: #1a1b1d;
+    border-radius: 8px;
+    border: none;
+    height: 6rem;
+    border-bottom: 4px solid #00e06e;
   }
 
   .nome_botao_preco {
     font-family: 'Abhaya Libre';
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     color: #CBCBCB;
   }
 
@@ -375,12 +526,29 @@
     margin-bottom: 1rem;
   }
 
+  .incremento_unico_dark {
+    background-color: #282828;
+    width: 100%;
+    height: auto;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
   .valor_incremento {
     font-family: 'Abhaya Libre ExtraBold';
     font-weight: 800;
     font-size: 16px;
     color: #CBCBCB;
     padding: 0.5rem;
+    text-align: center;
+  }
+
+  .valor_incremento_mais_de_um {
+    font-family: 'Abhaya Libre ExtraBold';
+    font-weight: 800;
+    font-size: 16px;
+    color: #CBCBCB;
     text-align: center;
   }
 
@@ -398,13 +566,30 @@
     padding: 0.5rem;
   }
 
+  .total_compra_dark {
+    background-color: #424242;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 1rem;
+    border-radius: 8px;
+    height: auto;
+    font-family: 'Abhaya Libre ExtraBold';
+    font-weight: 400;
+    font-size: 14px;
+    color: white;
+    padding: 0.5rem;
+    border-left: 7px solid #00e06e;
+    border-right: 7px solid #00e06e;
+  }
+  
+
   .valor_total {
     font-weight: 800;
     font-size: 16px;
   }
 
   .botao_finalizar {
-    width: 10rem;
+    width: 15rem;
     max-width: 400px;
     background-image: linear-gradient(to right, #31B55C 0%, #114823 50%);
     font-family: 'Abhaya Libre ExtraBold';
@@ -418,6 +603,22 @@
     padding: 0.5rem;
   }
 
+  .botao_operacao {
+    border: none;
+    background-color: #114823;
+    font-size: 16px;
+    color: #CBCBCB;
+    font-weight: 600;
+  }
+
+  .botao_operacao_dark {
+    border: none;
+    background-color: #575757;
+    font-size: 16px;
+    font-weight: 600;
+    color: #0ecb6a;
+  }
+
   .incremento_um_em_um {
     display: flex;
     justify-content: space-around;
@@ -427,10 +628,19 @@
     height: 4rem;
   }
 
+  .incremento_um_em_um_dark {
+    display: flex;
+    justify-content: space-around;
+    background-color: #575757;
+    width: 100%;
+    border-radius: 16px;
+    height: 4rem;
+  }
+
   .descricao_rifa {
     font-family: 'Abhaya Libre';
     font-weight: 400;
-    font-size: 20px;
+    font-size: 16px;
     color: #114823;
   }
 

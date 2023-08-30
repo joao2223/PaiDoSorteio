@@ -4,14 +4,20 @@ import styles from './ConfigAdmin.module.scss';
 import rifados from '../../assets/Inicio/rifados.jpg';
 import logoSrc from '../../assets/logo.svg';
 import IImagens from '../../interfaces/IImagens';
+import { useAuth } from '../../authContext';
 
 export default function ConfigAdmin() {
     const [imgHomePage, setImgHomePage] = useState<string>("");
     const [imgLogo, setImgLogo] = useState<string>("");
-    const[imagens, setImagens] = useState<IImagens>();
+    const [imagens, setImagens] = useState<IImagens>();
+    const { token } = useAuth()
 
     useEffect(() => {
-        axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/home-pages/1')
+        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/home-pages/1', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(resposta => {
                 setImagens(resposta.data);
             })
@@ -28,7 +34,11 @@ export default function ConfigAdmin() {
             imgLogo: imgLogo,
         };
 
-        axios.put('https://site-rifa-70b9f8e109e5.herokuapp.com/home-pages/1', requestData)
+        axios.put('https://rifas-heroku-3f8d803a7c71.herokuapp.com/home-pages/1', requestData, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((resposta) => {
                 setImgHomePage(imgHomePage);
                 setImgLogo(imgLogo);
@@ -39,8 +49,9 @@ export default function ConfigAdmin() {
     };
 
     return (
-        <>
-            <h2 className={styles.titulo}>Configurações</h2>
+        <div className={styles.cor}>
+
+            <div className={styles.container_titulo}><h2 className={styles.titulo}>Configurações</h2></div>
 
             <div className={styles.container_imagens}>
                 <div className={styles.titulo_mais_imagem}>
@@ -75,6 +86,6 @@ export default function ConfigAdmin() {
                     </button>
                 </form>
             </div>
-        </>
+        </div>
     );
 }

@@ -18,13 +18,17 @@ export default function PedidosAdmin() {
     const [numerosPagos, setNumerosPagos] = useState<number>(0);
     const [selectedRifa, setSelectedRifa] = useState<string | null>(null);
     const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
-    const [searchNumber, setSearchNumber] = useState<number | null>(null); 
-    const [filteredOrders, setFilteredOrders] = useState<IOrder[]>([]); 
+    const [searchNumber, setSearchNumber] = useState<number | null>(null);
+    const [filteredOrders, setFilteredOrders] = useState<IOrder[]>([]);
     const { token } = useAuth();
 
 
     useEffect(() => {
-        axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/orders')
+        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/orders', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((response) => {
                 setOrders(response.data);
             })
@@ -32,7 +36,11 @@ export default function PedidosAdmin() {
                 console.log(error);
             });
 
-        axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/raffles')
+        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((response) => {
                 setRifas(response.data);
             })
@@ -72,7 +80,11 @@ export default function PedidosAdmin() {
     }, [selectedRifa, orders, rifas]);
 
     useEffect(() => {
-        axios.get('https://site-rifa-70b9f8e109e5.herokuapp.com/raffles')
+        axios.get('https://rifas-heroku-3f8d803a7c71.herokuapp.com/raffles', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((response) => {
                 const fetchedRifas = response.data;
                 console.log(fetchedRifas)
@@ -171,14 +183,18 @@ export default function PedidosAdmin() {
         setFilteredOrders(filteredOrders);
     };
 
-    const deletarPedido = (id:number) => {
-        axios.delete(`https://site-rifa-70b9f8e109e5.herokuapp.com/orders/${id}`)
-        .then(response => {
-            console.log(response)
+    const deletarPedido = (id: number) => {
+        axios.delete(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/orders/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         })
-        .catch(error => {
-            console.log(error)
-        })
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     const alteraStatus = (id: number, name: string, phone: string, file: string) => {
@@ -189,7 +205,7 @@ export default function PedidosAdmin() {
             "userStatus": "TRUE"
         };
 
-        axios.put(`https://site-rifa-70b9f8e109e5.herokuapp.com/users/${id}`, formData)
+        axios.put(`https://rifas-heroku-3f8d803a7c71.herokuapp.com/users/${id}`, formData)
             .then(response => {
                 console.log(response);
             })
@@ -200,8 +216,10 @@ export default function PedidosAdmin() {
 
 
     return (
-        <>
-            <h2 className={styles.titulo_pedidos}>Pedidos</h2>
+        <div className={styles.cor}>
+            <div className={styles.container_titulo}>
+                <h2 >Pedidos</h2>
+            </div>
 
             <div className={styles.filtros}>
                 <select
@@ -274,7 +292,7 @@ export default function PedidosAdmin() {
                             <th>Total</th>
                             <th>Deletar pedido</th>
                             <th >Data</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
@@ -294,11 +312,11 @@ export default function PedidosAdmin() {
                                         ))}
                                         {order.items[0].generatedNumbers.length > 5 && <span>...</span>}
                                     </td>
-                                    <StatusComponent file={order.client.file} id={order.client.id} name= {order.client.name} phone={order.client.phone}/>
+                                    <StatusComponent file={order.client.file} id={order.client.id} name={order.client.name} phone={order.client.phone} />
                                     <td>{order.items[0].subTotal.toLocaleString()}</td>
                                     <td>
                                         <div className={styles.botoes}>
-                                            <button className={styles.botao_marcar} onClick = {() => deletarPedido(order.client.id)}>Deletar pedido</button>
+                                            <button className={styles.botao_marcar} onClick={() => deletarPedido(order.client.id)}>Deletar pedido</button>
                                         </div>
 
                                     </td>
@@ -315,6 +333,6 @@ export default function PedidosAdmin() {
                 </table>
             </div>
 
-        </>
+        </div>
     )
 }
